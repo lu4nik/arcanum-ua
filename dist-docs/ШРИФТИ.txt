@@ -1,0 +1,33 @@
+Шрифти з кирилицею в цьому архіві
+=================================
+
+Файли *font.art — бітмапні шрифти гри, у яких кадри кирилиці (cp1251)
+перемальовано рендером із вільних шрифтів. Латинські кадри — оригінальні,
+з гри.
+
+Використані гарнітури:
+
+* Forum — Denis Masharov, SIL Open Font License 1.1
+  https://fonts.google.com/specimen/Forum
+  меню, назви газет і частина шрифтів інтерфейсу
+
+* PT Serif, PT Serif Caption, PT Sans, PT Sans Narrow — ParaType, ParaType Free Font License
+  https://www.paratype.com/fonts/pt/pt-serif
+  діалоги (flare12/flare14), книжки (casablanca16), газета (garmond, swiss921),
+  жирний і вузький шрифти інтерфейсу
+
+* Cormorant Unicase — Copyright 2015 the Cormorant Project Authors,
+  SIL Open Font License 1.1
+  https://fonts.google.com/specimen/Cormorant+Unicase
+  назви предметів (morph15)
+
+* Old Standard TT — Copyright 2011 The Old Standard Project Authors,
+  SIL Open Font License 1.1
+  https://fonts.google.com/specimen/Old+Standard+TT
+  декоративні заголовки (cloister18, casablancaantique30, nick16)
+
+* Marck Script — Denis Masharov, SIL Open Font License 1.1
+  https://fonts.google.com/specimen/Marck+Script
+  рукописні листи (pepper20)
+
+Тексти ліцензій: https://openfontlicense.org та сторінка ParaType вище.

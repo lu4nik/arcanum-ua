@@ -1,0 +1,971 @@
+en	uk	note
+Arcanum	Арканум	назва світу/гри, не перекладати; род. в. «Аркануму» (назва краю, як Криму/Сибіру), НЕ «Арканума»
+Virgil	Вірджил	супутник; ? чи Верґілій (алюзія на Данте) — вирішити
+Arronax	Арронакс
+Panarii	панарії	релігія; однина: панарій; ЗАТВЕРДЖЕНО 2026-11-05 (панаріани/панарійці розглянуто й відхилено)
+The Living One	Живий / Жива	ЗАТВЕРДЖЕНО 2026-11-05; вокатив «о Живий/о Жива»; у цитатах Писання — чоловічий
+Tarant	Тарант	місто; род. в. «Таранта» (місто), дав. «Таранту»
+Caladon	Каладон	місто
+Shrouded Hills	Туманні Пагорби	ЗАТВЕРДЖЕНО 2026-11-05; місц. у Туманних Пагорбах, род. Туманних Пагорбів
+Dernholm	Дернгольм	місто
+Zephyr	«Зефір»	цепелін з прологу
+IFS Zephyr	«Зефір»
+magick	магія	? оригінал навмисно архаїчний (magick/magic) — подумати про «маґія» для розрізнення
+technology	технологія
+gnome	гном
+dwarf	дворф	? чи «ґном»/«карлик» — класична проблема; НЕ плутати з gnome
+half-ogre	напіво́гр
+half-orc	напіворк
+half-elf	напівельф
+halfling	половинчик
+fatigue	втома	ресурс
+reaction	реакція	механіка
+quest	завдання	НЕ «квест» у текстах від імені світу
+sir	пане	звертання
+madam	пані	звертання
+constitution	статура	характеристика CN
+dexterity	спритність	характеристика DX
+strength	сила	характеристика ST
+beauty	краса	характеристика BE
+intelligence	інтелект	характеристика IN
+perception	сприйняття	характеристика PE
+willpower	воля	характеристика WP
+charisma	харизма	характеристика CH
+aptitude	схильність	магічна/технологічна схильність
+Haggle	Торгівля	навичка
+Prowling	Скрадання	навичка
+Dodge	Ухиляння	навичка
+Melee	Ближній бій	навичка
+background	передісторія	чаркрейт
+turn-based	покроковий бій	
+save game	збереження	іменник; дієслово: зберегти гру
+Options	Налаштування	меню
+Credits	Автори	меню
+stat abbreviations	СЛ СП СТ КР ІН СЙ ВЛ ХР	? погодити з charedit.mes при перекладі
+Molochean Hand	Рука Молоха	гільдія найманих убивць; затверджено користувачем 2025-11-04
+Virgil	Вірджил	супутник; dumb-спотворення: Віргуль, Віргу, Віртиго, Вораціо, Вортигун
+Elder Joachim	старійшина Йоаким	НЕ «Йоахім»
+Preston Radcliffe	Престон Редкліфф	гном з прологу; род. Редкліффа
+Doc Roberts	Док Робертс	лікар у Туманних Пагорбах
+Constable Owens	констебль Оуенс	
+Jongle Dunne	Джонгл Данн	
+Lloyd Gurloes	Ллойд Герлоуз	коваль
+Bessie Toone	Бессі Тун	шахта і привид
+Gilbert Bates	Ґілберт Бейтс	винахідник парового двигуна
+P. Schuyler & Sons	«П. Скайлер і сини»	контора в Таранті
+Stennar Rock Cutter	Стеннар Каменетес	
+Black Mountain Clan	клан Чорної Гори	
+Wheel Clan	клан Колеса	
+Isle of Despair	Острів Відчаю	
+Dernholm Pits	Дернгольмські Ями	в'язниця
+Qintarra	Квінтарра	
+Glimmering Forest	Мерехтливий ліс	
+Stillwater	Тиховоддя	ЗАТВЕРДЖЕНО 2026-11-05; у Тиховодді, до Тиховоддя
+Ashbury	Ешбері	
+T'sen-Ang	Т'сен-Анг	місц. Т'сен-Анзі
+Ring of Brodgar	Коло Бродґара	
+Silver Lady	Срібна Пані	королева ельфів Квінтарри, мати Рейвен
+Nasrudin	Насрудін	
+Arronax	Арронакс	
+scriptures	Писання	священні тексти панаріїв
+steam engine	паровий двигун	
+gold pieces	золоті	валюта в мові людей
+healing potion	цілюще зілля	
+Repair	Ремонт	навичка
+Firearms	Вогнепальна зброя	навичка
+Lockpicking	Злам замків	навичка
+Ristezze	Рістецце	крамар у Туманних Пагорбах; НЕ відмінюється
+Constable Owens	констебль Оуенс	
+Kerghan	Керган	головний антагоніст
+the evil one	Лихий	пророцтва
+signet ring	перстень-печатка	
+Thorvald	Торвальд	
+Ogdin	Оґдін	напівогр-воротар, Острів Відчаю
+Madam Lil	Мадам Ліл	виняток: «Мадам» як титул борделю
+Sir (лицар)	Сер	лицарський титул; звертання sir лишається «пане»
+Zeph Yeats	Зеф Єтс	
+Steamrail Station	станція парової залізниці	
+Source	Джерело	магічне
+Fate Points	очки долі	
+stone (вага)	стоун	вікторіанська одиниця
+Unidentified	неопізнаний	предмети, за родом
+Charmed/Magick/Mystic/Arcane	зачарований/магічний/містичний/чародійний	ступені предметів
+Broadsword	палаш	
+Scimitar	ятаган	
+Pistol	пістоль	
+Flame Thrower	вогнемет	
+Acid Gun	кислотомет	
+Blade Launcher	лезомет	
+Chainmail	кольчуга	
+Platemail	лати	
+Robes	шати	
+Conveyance	переміщення	школа магії
+Divination	віщування	школа магії
+Necromantic Black/White	чорна/біла некромантія	школи магії
+Temporal	час	школа магії
+Summoning	прикликання	школа магії
+Morph	метаморфози	школа магії
+Phantasm	фантазми	школа магії
+Archaeon	Археон	? книга Писання, підтвердити
+Black Root	Чорний Корінь	містечко; род. Чорного Кореня, місц. у Чорному Корені
+Falcon's Ache	Соколиний Біль	? поселення
+the Boil	Нарив	район нетрів Таранта
+Hedgewizard	Хащовий чарівник	? NPC-титул
+Bane of Kree	Погибель Крі	
+Kree	Крі	зруйноване місто/варвари
+Bogaroth	Боґарот	
+Stringy Pete	Жилавий Піт	пірат-привид
+Bangellian Scourge	Бенджеліанський Бич	?
+Bangellian Furnace	Бенджеліанська Піч	?
+Vendigroth Device	Пристрій Вендіґрота	
+the Dredge	Драга	? затоплені дворфські копальні
+Vegard Molten Flow	Веґард Розплавлений Потік	?
+Thrayne Iron Heart	Трейн Залізне Серце	
+Stonecutter Clan	клан Каменетесів	
+Iron Clan	клан Заліза	
+Clan Maug	клан Мауґ	
+Darian Maug	Даріан Мауґ	
+Gildor Nightwalk	Ґілдор Найтвок	? ельф; чи перекладати прізвище
+Garrick Stout	Ґаррік Стаут	сер, майстер ближнього бою
+Matt de Cesare	Метт де Чезаре	сер
+Madame Toussaude	мадам Туссод	жарт про Тюссо; «мадам» — навмисний колорит
+Halcyon Order	орден Гальціона	? звірити з лором
+Torin Quarry	Торінський кар'єр	
+Thieves' Underground	Злодійське підпілля	гільдія злодіїв
+Whytechurch	Вайтчерч	район Каладона; алюзія на Вайтчепел
+Whytechurch Murderer	Вбивця з Вайтчерча	
+Unified Kingdom	Об'єднане Королівство	
+Lethe Wyvern	Летейський віверн	як у description.mes
+Vol'ars Wisp	вогник Вол'ар	з малої літери
+Shades Beach	Пляж Тіней	?
+Ten Hands Alley	провулок Десяти Рук	вулиці із загальних слів — перекладати
+Mulligan Bone Alley	провулок Малліґан-Боун	вулиці з прізвищ — транскрибувати
+East End Ave.	проспект Іст-Енд	?
+Bridesdale Inn	заїзд «Брайдсдейл»	
+Devonshire Way	Девоншир-Вей	
+Low Dervish Row / Way	Нижня Дервішева дорога	? EN сам непослідовний
+Wellington	«Веллінгтон»	клуб джентльменів у Таранті
+The Tarantian	«Тарантський вісник»	газета; відмінюється
+The Vendigroth Times	«Вендіґротські часи»	? газета
+Sarah Toone	Сара Тун	дочка Бессі
+Percival Toone	Персіваль Тун	син Бессі, продав шахту
+Toone	Тун	мн. Туни, род. Тунів
+Stanton	Стентон	скупник шахти, Тарант
+Stanton Importers	Імпортна компанія «Стентон»	?
+Lion's Head Circle	площа Лев'ячої Голови	
+mithril	мітрил	
+banded armor	наборний обладунок	?
+Lukan the Witless	Лукан Безклепкий	розбійник на мосту Туманних Пагорбів
+William Radcliffe	Вільям Редкліфф	«брат» Престона, агент Руки Молоха
+Herbology	траволікування	техн. дисципліна
+Chemistry	хімія	техн. дисципліна
+Electric	електрика	техн. дисципліна
+Explosives	вибухові речовини	техн. дисципліна
+Gun Smithy	зброярство	техн. дисципліна
+Mechanical	механіка	техн. дисципліна
+Smithy	ковальство	техн. дисципліна; НЕ «кузня» (будівля)
+Therapeutics	терапія	техн. дисципліна
+technologist	технолог	
+scientician	науковець	? жартівливий неологізм
+schematic	схема	
+Tulla	Тулла	прикм. тулланський
+Vendigroth	Вендіґрот	прикм. вендіґротський
+Elixir of Persuasion	Зілля переконання	? EN плутає Elixir/Potion
+Charm (закляття)	Причарування	НЕ «зачарування» (Charmed-предмети) і НЕ «очарування»
+Call / Conjure / Summon	Поклик / Виклик / Прикликання	розрізнення в закляттях
+Force (школа)	Енергія	школа магії; не «Сила» (характеристика)
+Mental (школа)	Розум	школа магії
+Were-rat	щуролак	
+EXTRA!	НАДЗВИЧАЙНИЙ ВИПУСК!	газетна шапка
+Industrial Council	Промислова рада	Тарант
+Grey Mountains	Сірі гори	
+Vermillion Station	станція Вермільйон	
+Brackenton line	Брекентонська лінія	залізниця
+Morbihan Plains	Морбіанські рівнини	?
+Hadrian River	річка Гадріан	Hadrian's Pride — «Гордість Гадріана»
+Kensington Park	Кенсінґтонський парк	Тарант
+Friends of Magick	«Друзі Магії»	товариство
+League of Scientists	Ліга вчених	
+Sobbing Onion Tavern	таверна «Ридаюча цибуля»	
+Saints Ave.	проспект Святих	Каладон; «5» в адресі поліції — номер будинку, не частина назви
+Old Market Theatre	Театр Старого ринку	
+Victor Wright	Віктор Райт	редактор «Вісника»
+William Willaby	Вільям Віллабі	сер, власник «Вісника»
+Edward Willoughsby	Едвард Віллоуґсбі	голова Промислової ради
+Garringsburg	Ґарринґсбурґ	Джеймс і Евелін, колекціонери
+Cedric Appleby	Седрік Еплбі	
+Franklin Payne	Френклін Пейн	мандрівник
+Captain Wheeler	капітан Вілер	
+Donn Throgg	Донн Трогг	напіворк-політик
+Chief Inspector Henderson	головний інспектор Гендерсон	
+Guinevere Sykes	Ґвінівер Сайкс	журналістка; звертання «панна»
+Edward Teach	Едвард Тіч	пірат, алюзія на Чорну Бороду
+Stillwater Blades	тиховодські клинки	
+Kerghan and Persephone	«Керган і Персефона»	картина
+Larik Greenshaw	Ларік Ґріншо	
+hex-smith	чароковаль	?
+Pollock	Поллок	
+Raven	Рейвен	ельфійка, дочка Срібної Пані; НЕ відмінюється; НЕ «Ворон»
+Falcon (королева)	Сокіл	давня ельфійська королева; не відмінюється
+M'in Gorad	М'ін Ґорад	темна ельфійка; не відмінюється
+Z'an Al'urin	З'ан Аль'юрін	темна ельфійка
+Derian-Ka	Деріан-Ка	давній Орден Мертвих
+Order of the Dead	Орден Мертвих	
+Gulf of Morbihan	Морбіанська затока	
+Leahbo	Ліабо	? селище половинчиків
+Clan Wars	Війни кланів	дворфські
+Simeon Tor	Сімеон Тор	
+Magnus Shale Fist	Маґнус Сланцевий Кулак	дворф-супутник
+Loghaire Thunder Stone	Логайр Громовий Камінь	король клану Колеса; НЕ «Логер»
+Randver Thunder Stone	Рандвер Громовий Камінь	син Логайра
+Gudmund Ore Bender	Ґудмунд Згинач Руди	
+Gurin Rockharrow	Ґурін Рокгарроу	
+Chukka	Чукка	охоронець Бейтса, напіворк
+Alberich	Альберіх	дворфський цар із міфів; клятва «Клянусь Альберіхом»
+Molocheans	молохіанці	члени Руки Молоха; прикм. молохіанський
+Ebeneezer	Ебенезер	алюзія на Скруджа
+half-orc (жінка)	напіворчиня	вок. «напіворчине»
+the robed ones	ті, що в мантіях	? таємничі постаті в Бейтса
+Backstab	Удар у спину	навичка
+Spot Trap	Виявлення пасток	навичка
+Disarm Traps	Знешкодження пасток	навичка
+Pick Locks	Злам замків	навичка
+Gambling	Азартні ігри	навичка
+Throwing	Метання	навичка
+Bow (навичка)	Лук	
+Heal (навичка)	Лікування	
+Persuasion	Переконання	навичка
+Apprentice / Expert / Master	Учень / Експерт / Майстер	ступені навичок
+Layman/Novice/Assistant/Associate/Technician/Engineer/Professor/Doctorate	Непосвячений/Новачок/Асистент/Співробітник/Технік/Інженер/Професор/Доктор	ступені технологій
+Heal Rate	Темп зцілення	
+the Void	Порожнеча	
+Kerghan's Bane	Погибель Кергана	
+Thanatos	Танатос	Острів Смерті
+Hall of Records	Палата записів	Тарант
+Elven Council	Ельфійська рада	
+Age of Legends	Доба Легенд	
+Black Legion	Чорний легіон	
+Zoological Society	Зоологічне товариство	Тарант
+Napha Water	вода «Нафа»	
+Heron Device	«Пристрій Герона»	
+Jewel of Hebe	Самоцвіт Гебе	
+Mushroom Inn	заїзд «Гриб»	Каладон
+Sour Barnacle	«Кисла Мушля»	? таверна, Чорний Корінь
+Stonewall Mountains	гори Кам'яної Стіни	
+Roseborough	Роузборо	містечко біля Кола Бродґара
+Dark Fens	Темні болота	
+Bedokaan	бедокаани	ящероподібний народ; одн. бедокаан
+Cumbria	Камбрія	королівство; столиця Дернгольм
+Black Mountain Mines	Копальні Чорної Гори	
+Vendigroth Wastes	Вендіґротські пустища	
+Hardin's Pass	Перевал Гардіна	
+Gorgoth Pass	Перевал Ґорґот	
+Vooriden	Вуріден	село
+Bangellian Deeps	Бенджеліанські глибини	
+Lady Druella	леді Друелла	
+Liam Cameron	Ліам Кемерон	
+Blade of Xerxes	Клинок Ксеркса	
+Ashlag Tribe	плем'я ашлаґів	
+Szabo	Сабо	руїни
+Azram's Star	Зірка Азрама	
+Simon Fahrkus	Саймон Фаркус	злодій артефакту Арбали, нервовий; не маг
+Arbalah	Арбалаг	священик-самітник на фермі; відм. Арбалага/Арбалагу/Арбалагом; h→г за правописом (Арбала відхилено 2026-11-06: читалося як жіноче ім'я)
+Weldo Rubin	Велдо Рубін	
+Geshtianna	Ґештіанна	богиня
+Halcyon (бог)	Гальціон	
+Moorindal	Моріндал	? бог
+Kai'tan	Кай'тан	бог
+Velorien	Велоріен	бог
+Heartstone	Серцекамінь	
+Mnura	мнура	монета
+Great Horned God	Великий Рогатий Бог	
+Kryggird's Falchion	фальшион Кріґґірда	
+Victor Misk	Віктор Міск	небіжчик, квест із заповітом (цвинтар Каладона, Бінґем); маєток Місків
+K'an Hua	К'ан Хуа	
+Winston Schuyler	Вінстон Скайлер	
+Benjamin Bates	Бенджамін Бейтс	
+Kal-N'driel	Кал-Н'дріель	
+Clarissa Shalmo	Клариса Шалмо	
+Adkin Chambers	Адкін Чемберс	НЕ «Едкін»
+Daniel McPherson	Деніел Макферсон	
+Thaddeus Mynor	Таддеус Майнор	
+Ryan Sanders	Раян Сандерс	НЕ «Райан»
+Lungsten Road	Лунґстен-Роуд	вулиця з прізвища
+Vermillion Road	Вермільйон-Роуд	
+Trellis Way	Трелліс-Вей	
+Polton Cross	Полтон-Кросс	
+STOP (телеграма)	КРАПКА	
+Vollinger	Воллінґер	
+Bellerogrim	Беллерогрім	дракон
+Maug Maulman	Мауґ Молман	
+banish (у Порожнечу)	вигнати / вигнання	КАНОН: закляття вигнання; exile (м'якше) → вислати
+Mannox	Маннокс	святий Маннокс, перший аколіт; НЕ «Меннокс»
+Kraka-Tur	Крака-Тур	дракон-перевертень, союзник Арронакса
+Gorgoth (істота)	Ґорґот	вигнаний у Порожнечу
+Kerghan the Terrible	Керган Жахливий	
+Portal Stones	Портальні камені	?
+High Acolyte / First Acolyte	верховний аколіт / перший аколіт	НЕ «послушник»
+Black Spire	Чорний Шпиль	Квінтарра?
+the Wastes	Пустища	Вендіґротські
+Gunther Willhelm	Ґюнтер Вільгельм	
+K'rynn Urden	К'рінн Урден	
+Smythers	Смайзерс	провідник, Острів Відчаю
+Darkfall / New Sun / Solstice / Harvest	Присмерк / Нове Сонце / Сонцестояння / Жнива	? місяці панарійського календаря: «5-го Жнив, 1108»
+Durin	Дурін	Книга Істини Дуріна
+Place of Voices	Місце Голосів	?
+Vault of Iron	Залізне Сховище	?
+Court of the Executioners	Суд Катів	? підземелля
+Whitehall	Вайтголл	
+Athenaeum	Атеней	НЕ «Атенеум»
+T'erre d' V'nt	Т'ерре д' В'нт	давня назва Таранта
+L'anamelach	Л'анамелах	демон
+Trellian	Треліан	перший убивця Руки Молоха
+Terg Skullcrusher	Терґ Черепоздер	?
+Tannon Wroughtbringer	Таннон Роутбрінґер	?
+Gideon Percival Roan	Ґідеон Персіваль Роан	альманах про дворфів
+Aldous T. Buxington III	Олдос Т. Баксінґтон III	
+Kendrick Wales	Кендрік Вейлз	«Прокляття Т'сен-Анга»
+Mazzerin	Маццерін	«Книга Дванадцяти Сил»
+Book of the Twelve Powers	«Книга Дванадцяти Сил»	
+Morbihan Forest	Морбіанський ліс	
+Mother Tree / Hall of Truth	Матір-Дерево / Зала Істини	Квінтарра
+Helion	Геліон	бог світла, батько Гальціона
+Wallis IV	Валліс IV	король; War of Thorns → Війна Терен
+War of Thorns	Війна Терен	
+Harrow	Гарроу	
+Lorek the Abjurer	Лорек Відступник	?
+King-in-Waiting	король-у-чеканні	? титул Рандвера
+Stone / Shape (дворфські)	Камінь / Форма	з великої літери
+Blunder Stone	Хромовий Камінь	образливе перекручення Громового Каменя
+Quirren	Квіррен	? темний ельф-поет
+Nysterrial	Нистерріал	? ельфійська прабатьківщина
+Thomas M. Hennessey	Томас М. Геннессі	сер
+Barnhaus	Барнгауз	майстер із Тулли
+Cricko-Scope	крікоскоп	мікроскоп Френсіса Кріка
+Hall of Knowledge	Палата Знань	Тулла
+Naomrin Palanar	Наомрін Паланар	архімаг
+Stillwater Giant	Тиховодський велетень	блакитний кролик!
+Ashton Fernwilter	Ештон Фернвілтер	
+Jonathan Eiloch	Джонатан Айлок	есквайр-поет
+Malcolm Rei	Малкольм Рей	трактат про напіворків
+Hamilton Demry	Гамільтон Демрі	«Питання про орків»
+Henry Dovern	Генрі Доверн	есквайр
+Elias Thorne	Еліас Торн	археолог
+Samuel Kjeldsen	Семюел К'єлдсен	
+Jessered Palkanepolee	Джессеред Палканеполі	філософ
+Amac Lucan	Амак Лукан	сер, «Боги дарують нам сажу»
+Eli Baskir	Елай Баскір	«Мисливці на мисливців»
+Grey the Diviner	Ґрей Віщун	?
+Alexis Cowdry	Алексіс Каудрі	«Велике Діяння»
+William Wiggin-Bends	Вільям Віґґін-Бендз	д-р
+Isaac Thrush	Айзек Траш	сер, есквайр
+Dread Armor	Обладунок Жаху	
+Frederick Von Hapsgood	Фредерік фон Гепсґуд	«Рука»
+Volume Obscura	Темний том	?
+Wool Raiser	Вівцегвалт	? розбійник у Рея
+Weres / werewolves	перевертні / вовкулаки	
+automata	автоматони	
+foot soldier (Руки)	рядовий виконавець / виконавиця	
+Torian Kel	Торіан Кел	род. Торіана Кела (тверда відміна)
+King Praetor	король Претор	Камбрія/Дернгольм
+Pelonious Schuyler	Пелоніус Скайлер	Скайлери — Каладон
+Eyeless Five	П'ятеро Безоких	?
+Jack Skellybone	Джек Скеллібон	? пірат
+Ruby Dirk	Рубі Дірк	? піратка
+Black Sam Bellamy	Чорний Сем Беллемі	? пірат
+Weeping Maidens	Плачучі Діви	? острови
+Serpentspine	Зміїний Хребет	?
+Lady Luck	пані Удача	?
+league	льє	відстань; не змінюється за числом
+brute / monstrosity	почвара / страховисько	
+Wild Man / berserker	дикун / берсерк	
+half-breed	покруч	лайка
+quarterling	чвертьчик	жарт від «половинчик»
+Halfie	напівельфик / напіворчик	зневажливе
+Blessed Be / Merry met	Благословенні будьмо / Радісна зустріч	? жрецькі вітання
+It is Her Will	Така Її воля	? чия саме «Вона» — звірити з лором
+citizen (звертання)	громадянине	вартові
+<cough> / <mutter>	<кхе> / <бурм>	звукові ремарки, движок їх не парсить
+Void City	Місто Порожнечі	?
+Gift Shop	сувенірна крамниця	
+Black Isle (gd_sto 500)	Чорний острів	? можливо = Острів Відчаю, перевірити в грі
+Herkemer Oggdoddler	Геркемер Оґґдоддлер	у dumb-версії лише «Оґґ» (жарт)
+Schuyler & Sons	Скайлер і сини	? фірма в Каладоні
+coins / gold pieces	монети / золоті	перекладати те, що в оригіналі; не уніфікувати
+Basil Pettibone	Бейзил Петтібон	
+Pizarro (художник)	Пісарро	«Керган і Персефона»
+Polgram	Полґрам	дворецький-напівогр Ґарринґсбурґів
+Pickwick Alley	провулок Піквік	?
+Grimson Way	Ґрімсон-Вей	?
+Wendell Wellington	Венделл Веллінгтон	засновник клубу; -інг-, як клуб
+Rue de Avellone	вулиця Авеллон	?
+Jin and Xin Ren'ar	Джин і Сінь Рен'ар	сіамські близнючки
+Rorry Limes	Рорі Лаймс	
+Benjamin Gershwin	Бенджамін Ґершвін	френолог
+Delores Beston	Долорес Бестон	віщунка-шахрайка, Полтон-Кросс
+Edwin Wallows	Едвін Воллоуз	священик Гальціона, Вуріден
+Molly Williamson	Моллі Вільямсон	садиба Вільямсонів
+Jonas Williamson	Джонас Вільямсон	
+Matthew Jameson	Метью Джеймсон	обручка в каналізації
+Murgo	Мерго	напіворк? напівогр-помічник, Чорний Корінь
+Dr. Tristan Fenwick	доктор Трістан Фенвік	Зоологічне товариство
+phrenology	френологія	
+Bowen Gang	банда Боуена	
+sewer map	мапа каналізації	
+Kree barbarians	варвари Крі	
+Kensington Broadway	Кенсінґтон-Бродвей	
+Wild Woman / Amazon	дикунка / амазонка	ж. відповідники Wild Man
+Unnergrind (dumb)	Підпилля	перекручення «Підпілля»
+Dr. von Felden	доктор фон Фельден	?
+H.T. Parnell	Г. Т. Парнелл	шоумен, «Емпоріум Див», пародія на Барнума
+Emporium of Wonders	Емпоріум Див	Тарант
+Stanley Xavier Hippington	Стенлі Ксав'єр Гіппінґтон	криптозоолог
+Gar	Ґар	«орк» Парнелла, насправді людина
+cryptozoologist	криптозоолог	
+K'an Kerai	К'ан Керай	вождь бедокаанів; не відмінюється
+Waromon	Варомон	бедокаан-супутник
+warm-blood / cold-blood	теплокровні / холоднокровні	мова бедокаанів
+snake-fathers	батьки-змії	бедокаани
+K'an Hua (мовна маска)	«Так-ссс», «Славетно-ссс»	сичання верховного жерця
+Tollo Underhill	Толло Андергілл	половинчик, Ями Дернгольма
+Sir Chadwick Moore	сер Чедвік Мур	?
+Oasis of Mist	Оазис Туману	?
+Tullan Assembly	Тулланська Асамблея	?
+Thorvald Two Stones	Торвальд Два Камені	
+Borag	Бораг	
+Black Mountainer	чорногірець	
+R'aan-Dar	Р'ан-Дар	
+Old Mary	Стара Мері	мушкетон Пейна
+blunderbuss	мушкетон	
+Jolly Roger	«Веселий Роджер»	
+Malachi Rench	Малахі Ренч	?
+Geoffrey Tarellond-Ashe	Джеффрі Тарелонд-Еш	некромант-сноб; ЄДИНЕ написання
+Bates Mausoleum	мавзолей Бейтсів	
+Dead Hollows	Мертві Лощини	?
+Basil / Edward / Niles Schuyler	Бейзил / Едвард / Найлз Скайлер	
+Gyr-Dolour	Ґір-Долор	істоти; мн. Ґір-Долори; лігво Ґір-Долорів
+William Thorndop	Вільям Торндоп	майстер вогнепальної зброї, монах
+Willenbecker Gang	банда Віленбекера	
+Mrs. Rolland	пані Ролленд	
+Master (звання, жін.)	Майстриня	
+Gentleman's dice	«Джентльменські кості»	гра
+Jormund	Йормунд	дворф-маг у Квінтаррі
+Wrath (ельф)	Врат	учитель Йормунда; род. Врата
+Sharpe	Шарп	? аптекар, Квінтарра
+Staff of Xoranth	Посох Зоранта	?
+Myrth	Мірт	ельф-жартівник, Тиховоддя
+Guzarat	Гузарат	? клятва «Бородою Гузарата»
+Madeleine	Мадлен	корабель/дружина Жилавого Піта
+blood ale	кривавий ель	
+magick user (жін.)	магиня	
+Kathorn crystal	кристал катхорн	не відмінюється
+Pelojian	Пелоджіан	привид-художник і провісник (Вендіґрот), автор Фрески Просвітлення; також ставок Пелоджіана
+Fire Giant	вогняний велетень	
+Hagian (dumb)	Гагіан	спотворений Гадріан
+Garfield Thelonius Remington III	Ґарфілд Телоніус Ремінґтон Третій	справжнє ім'я «орка» Ґара
+Sebastian	Себастіан	найманець
+Mooreland	Мурленд	пан/пані
+Langley	Ленґлі	
+Gray Wolf Terrace	Тераса Сірого Вовка	?
+Heinrich Jenks	Гайнріх Єнкс	змовник
+Grant's Tavern	таверна Ґранта	
+Garret Almstead	Ґаррет Олмстед	коваль-напіворк, Чорний Корінь
+Professor Eakins (роль)	демонолог	Тарант
+Daniel Hallaway	Деніел Галловей	заїзд у Чорному Корені
+Expert (жін.)	Експертка	
+Dante	Данте	радник Претора
+Princess Aria	принцеса Арія	
+Xavier Silonus	Ксав'єр Сілонус	?
+Elizabeth Dane	«Елізабет Дейн»	корабель
+gold bar	золотий злиток	
+King Torren	король Торрен	?
+Dragon Knights	Лицарі Дракона	?
+Grunwalde	Ґрунвальд	
+Mage's Caboose	магічний хвостовий вагон	
+conductor	кондуктор	
+Game of Wit	«Гра в дотепність»	вікторина
+Garillon Bridge	Ґарійонський міст	Тарант
+Hereditology	спадкознавство	жарт-наука
+Cumbrian Fire	Камбрійський вогонь	зброя дракарів
+The Bend / The Mills / Porem	Вигин / Млини / Порем	річки
+Jorian the Diviner	Йоріан Віщун	
+turnip-eater	ріпоїд / ріпоїдка	бандитська лайка
+priest (звертання)	отче	гравець до жерця
+Butcher of Stillwater	Тиховодський Різник / Різниця	
+Babcock	Бебкок	радник
+Whytechurch Landing	Вайтчерчська пристань	?
+Temple Road	Храмова дорога	?
+Monster Island	Острів Монстрів	?
+Renee / Emily	Рене / Емілі	жертви Вайтчерча
+Aamlech	Аамлех	? демон
+bounty hunter	мисливець за головами	
+Cassie	Кессі	
+Razors Pointe	Бритвений мис	мис — з малої
+Charles Brehgo	Чарльз Брего	стражденний дух-брехун; не відмінюється
+Sogg Mead Mug	Соґґ Кухоль Меду	огр-бармен, Туманні Пагорби; вок. Соґґу
+Thom Grak	Том Грак	
+Bingham Schulefest	Бінґем Шулефест	
+Malcolm Schulefest	Малколм Шулефест	«справжнє ім'я» Маґнуса за Бінґемом
+Phillip Misk	Філіп Міск	батько Віктора
+Lillian Misk	Ліліан Міск	вдова Віктора
+Library of Tarant	Тарантська бібліотека	
+Mr. Black	пан Блек	скупник
+Adam Maxwell	Адам Максвелл	Злодійське підпілля
+Frederick T. Fitzgerald	Фредерік Т. Фіцджеральд	майстер Виявлення пасток
+Sammie White	Семмі Вайт	
+K'an T'au	К'ан Т'ау	не відмінюється; посох К'ан Т'ау
+V'ed Eckes	В'ед Екес	майстер гідромантії, Тулла
+Hydromancy	гідромантія	
+Gideon Laier	Ґідеон Лаєр	Перший Клинок Руки Молоха
+First Blade	Перший Клинок	
+Ivory	Айворі	ельфійка, дружина Шарпа
+Jayna Stiles	Джейна Стайлз	цілителька-технологиня, Дернгольм
+Nightfire	Найтфайр	? напівельф Ґілдора
+Great Ruby of K'alru	Великий Рубін К'алру	?
+Dragon's Blood pool	Басейн Драконячої Крові	?
+Bunny / Alice / Willow / Laura	Банні / Аліса / Віллоу / Лора	дівчата Мадам Ліл
+Belle (вівця)	Белла	
+housekeeper	економка	
+Volgard	Вольґард	? дворфська клятва
+Lawrence	Лоуренс	брат Вірджила
+foreman	майстер	фабрика
+union	робітнича спілка	
+snake eyes / pips	зміїні очі / очки	кості
+Kietzel Pierce	Кітцель Пірс	майстер-лучник
+Dudley Crosston	Дадлі Кросстон	
+Bow of Ecclesiastes	Лук Екклезіаста	НЕ «Еклезіат»
+Temple of Szabo	храм Сабо	
+aeroplane	аероплан	
+Torringsdale Logging Company	лісозаготівельна компанія «Торрінгсдейл»	?
+William Bench	Вільям Бенч	
+Dragon's Breath	таверна «Подих Дракона»	?
+Mad King Tavern	таверна «Божевільний король»	?
+Thirsty Soul Saloon	салун «Спрагла душа»	?
+Caleb Malloy	Калеб Меллой	таверна в Нариві
+Mr. Razzia	пан Раззія	?
+shapeshifter	перевертень	
+Jyheirad	Джигейрад	воїн із Вогняної Твердині, шукач Клинка Ксеркса; найняв барон Суг; супутники Морравінд, Р'ін-Діак, Фрондо
+S'Btin'ka	С'Бтін'ка	майстриня Метаморфоз, Тулла
+Liam Raymond	Ліам Реймонд	майстер школи Мета
+Ferko Lydell	Ферко Лайделл	? майстер школи Природи
+Theo Brightstart	Тео Брайтстарт	половинчик-фермер
+Lycanthrope Restorative	ліки від лікантропії	
+Trevor Lynwood	Тревор Лінвуд	журналіст «Вісника»
+David Wit	Девід Віт	кроляча ферма; донька Синтія — перевертень
+Jason C. Guy	Джейсон К. Ґай	науковець біля Кола Бродґара
+Halster	Гелстер	пан/пані, Девоншир-Вей
+Gorrin	Горрін	господар Ями, Острів Відчаю
+J.M. Morat	Дж. М. Морат	гном, майстер Торгівлі
+Mrs. Morgan	пані Морґан	мати Джей-Ті Морґана, Роузборо; майстер зламу — її син
+Brigitte	Бріджит	жриця Ґештіанни, Тиховоддя
+Muggs	Маґґз	збирач боргів клану Мауґ
+Biggs / Larrs	Біґґс / Ларс	банда Поллока
+Squinty Ben	Косоокий Бен	?
+Bangellian viper	бенджеліанська гадюка	
+Cynthia Boggs	Синтія Боггс	
+Zaugg	Зауґґ Трощиколіно	
+Zalakar the Bold	Залакар Відважний	?
+Treat	Трит	
+King of the Dice	Король Костей	?
+Milo	Майло	права рука Мауґа, гном
+Phineas McGee	Фінеас Макґі	
+Wilhemina	Вільгельміна	
+Jared	Джаред	капітан варти станції Вермільйон
+Rosemary	Розмарі	?
+D'ak Taan	Д'ак Таан	злодій; род. Д'ака Таана
+Salty (Seadrick)	Солоний	? гарпунник
+Ol' Painless	«Старий Безболь»	? гарпун
+Church of Cumbria	Церква Камбрії	Данте — предстоятель-вигнанець
+Metro Station (Тарант)	станція підземки	
+Garillon Bridge (канон)	Ґарійонський міст	НЕ «Ґарріллонський»
+Jack Skellybone (канон)	Джек Скеллібон	відм. Скеллібона; НЕ «Скелібонс»
+Durin (канон)	Дурін	род. Дуріна; НЕ «Дурина»
+Ve'Tura	Ве'Тура	майстриня переміщення, Тулла; вок. Ве'Туро
+Cassandra Johanson	Кассандра Йогансон	майстриня віщування, Тулла; «панна Йогансон»
+Wel' K'ene	Вел'К'ене	майстер повітря, Тулла; не відмінюється
+Addo Terrin	Аддо Террін	майстер землі, Тулла
+Naph'Tha	Наф'Та	майстриня вогню, Тулла; вок. Наф'То; гра на naphtha
+Rys'Ard	Рис'Ард	майстер енергії (Force), Тулла
+Edgar Jerryl	Едґар Джерріл	майстер розуму, Тулла; «пане Джерріле»
+D'ary	Д'арі	майстер чорної некромантії, Тулла; не відмінюється
+Bilko Gavin	Білко Ґевін	майстер білої некромантії, Тулла
+Daemon Gardi	Деймон Ґарді	майстер фантазмів, Тулла; прізвище не відмінюється
+Harold Sumner	Гарольд Прикликач	майстер прикликання; гра слів Sumner~summoner, справжнє ім'я Том Сміт; НЕ Самнер
+S'yala	С'яла	майстриня часу, Тулла; не відмінюється; вок. С'яло
+City of Mages	Місто Магів	Тулла
+West Garrillon Bridge	Західний Ґарійонський міст	станція підземки Таранта
+Tarant University	Тарантський університет	
+Warehouse District	Складський район	Тарант
+Commercial District	Торговий район	Тарант
+Tarantian Docks	Тарантські доки	
+Ticket Agent	касир	залізниця; front office → головна контора, ticket office → квиткова каса
+choo choo (dumb)	ту-ту	«Моя їхати ту-ту»
+Ashburee / Bwackroooot / Teerant (dumb)	Ешберіі / Чооорний Коорінь / Таарант	dumb-спотворення міст у касирів
+technologist (жін.)	технологиня	
+Albert Leek	Альберт Лік	майстер Скрадання («А. Л.»), напівельф; dumb «Ей-Ел»
+JT Morgan	Джей-Ті Морґан	майстер-замочник (Злам замків); син пані Морґан; dumb «Джей Ті Морґун»
+Mr. Pierce	пан Пірс	оптик у Таранті, окуляри на замовлення; НЕ Кітцель Пірс; dumb «Мейстер Пірс»
+locksmith	замочник	master locksmith → майстер-замочник; locksmithy → замочна справа; locksmith kit → набір замочника
+James Kingsford	Джеймс Кінґсфорд	продавець у «П. Скайлер і сини»
+Caladonian Telegraph Office	Каладонське телеграфне бюро	
+Whysper	Віспер	ельфійка Квінтарри; не відмінюється
+Winde	Вінд	ельф Квінтарри, майстер полювання; пан Вінд, пане Вінде
+Fawn	Фоун	Майстриня-цілителька Квінтарри; ельфійське ім'я Кал-Н'дріель; не відмінюється; dumb «Фоу»
+K'an-el	К'ан-ел	амулет; не відмінюється
+Chester Miller	Честер Міллер	мер Ешбері
+Lord Bettington	лорд Беттінґтон	source пише і Beddington — уніфіковано
+Mrs. Fiddlemarsh	пані Фіддлмарш	Ешбері
+Will-o-the-Wisp	блукаючий вогник	wisp essence → сутність вогника
+Master Healer	Майстер-цілитель	жін. Майстриня-цілителька
+blimp	цепелін	EN каже blimp упереміш; у перекладі скрізь «цепелін» (уніфіковано 2026-11-06, «дирижабль» викорінено)
+Westrel South	Вестрел-Саут	вулиця
+Quilton Bend	Квілтон-Бенд	вулиця
+Mrs. Pettibone	пані Петтібон	
+Jones the Collector	Джонс-Збирач	лахмітник на Острові Відчаю; звертання «Збирачу»
+Wesley Carrington	Веслі Керрінґтон	дворецький Місків, Каладон; dumb «Весті»
+Brinda	Брінда	покоївка Місків, орчий акцент; вок. Бріндо; dumb «Бінда»
+Deitrich	Дітріх	
+Pick Pocket	Кишенькова крадіжка	навичка (skill.mes {5})
+Committee on Technological Research	Комітет технологічних досліджень	Каладон
+Caladonian Military	Каладонське військове відомство	генерал Вірс
+Department of Trade and Export	Відомство торгівлі та експорту	Каладон
+Department of the Treasury	Скарбниця	Каладон
+Magick Consortium	Магічний консорціум	Каладон
+Department of Labor	Відомство праці	Каладон
+Caladonian Parliament	Каладонський парламент	
+Department of Agriculture	Відомство сільського господарства	Каладон
+Caladonian Mint	Каладонський монетний двір	
+Department of Transportation	Відомство транспорту	Каладон
+Department of Water and Power	Відомство водопостачання та енергетики	Тарант; станція: Тарантська станція водопостачання та енергетики
+General Veers	генерал Вірс	дворф, Каладонське військове відомство
+Bates Steam Engines	«Парові двигуни Бейтса»	компанія; фабрика: фабрика двигунів Бейтса
+shipbuilder	майстер-корабельник	Чорний Корінь
+Unified Battalions	Об'єднані батальйони	
+Unified Parliament	Об'єднаний парламент	
+Unified Gold	об'єднане золото	золотий стандарт
+Articles of membership	Статті про членство	Об'єднане Королівство
+First Acolyte Alexander	перший аколіт Александр	? чи Олександр
+lich	лич	
+mural	фреска	
+Zed Blacksword	Зед Чорномеч	епітафія
+Mr. Wags	Пан Хвостик	епітафія собаки
+Ms. Miranda Tears	пані Міранда Тірз	головоріз банди Поллока, Нарив; dumb «Міра»
+Dr. Edmund Craig	доктор Едмунд Крейг	
+Hieronymous Maxim	Гієронімус Максим	«Максим» у розмові
+Bates Engine Factory	фабрика двигунів Бейтса	
+the Underground	Підпілля	скорочення від Злодійське підпілля
+Renzo	Ренцо	половинчик, ватажок крадіїв у печері
+Frederik	Фредерік	Роузборо
+Arvid Millstone	Арвід Міллстоун	дворф, майстер у копальнях клану Колеса
+Lorria	Лорія	ватажка племені жінок, Острів Відчаю
+Dread Crystal Spiders	жахливі кришталеві павуки	
+W. Thomas Moreau	В. Томас Моро	агент банку, продає садибу Бейтсів
+Bates Mansion	садиба Бейтсів	
+Erland Iron Heart	Ерланд Залізне Серце	брат Трейна
+engagement ring	заручальна каблучка	silver ring → каблучка
+Cyrus	Сайрус	чарівник у Тиховодді
+Drog Black Tooth	Дрог Чорний Зуб	огр у Тиховодді
+Richard Leeks	Річард Лікс	коваль із Тиховоддя
+Baron Sug	барон Суг	наймач Джигейрада
+Bhuul	Бхул	бог Джигейрада
+Morrawynd / R'yn-Diak / Frondo	Морравінд / Р'ін-Діак / Фрондо	супутники Джигейрада; Фрондо НЕ Фродо
+Flame Keep	Вогняна Твердиня	
+Mural of Enlightenment	Фреска Просвітлення	Пелоджіан
+Verses of the Wanderer	Вірші Мандрівника	
+the Guardians (Tulla)	Охоронці	?
+Charles Dunston	Чарльз Данстон	керуючий Тарантською станцією водопостачання та енергетики; dumb Чаккі/Чак
+Archibald J. Sloane	Арчібальд Дж. Слоун	старий біля доків Таранта; син Бернард
+Bernard	Бернард	син Арчібальда Слоуна, Чорний Корінь
+Norian	Норіан	в'язень-самогонник
+Nicholas Longfoot	Ніколас ДОВГОНІГ	напівогр-бармен борделю; «Мадум»
+Gladys	Гледіс	стара вдова; квест із каблучкою
+Grenjar Silver Hammer	Гренджар Срібний Молот	дворф клану Чорної Гори, в'язень Острова Відчаю
+Arthur Tyron	Артур Тайрон	Чорний Корінь
+Guido Lightouch	Гвідо	в'язень; dumb «Гвіідо»
+Jerrold Aymes	Джеррольд Еймс	в'язень; пан Еймс
+Jonathan Sanders	Джонатан Сандерс	батько Раяна Сандерса
+Tor / Flog	Тор / Флоґ	охоронці Джонатана Сандерса; НЕ Сімеон Тор
+Lorham	Лорхем	охоронець Віллоуґсбі
+Tarant Telegraph Office	Тарантське телеграфне бюро	
+Ronald Langley	Рональд Ленґлі	швейцар заїзду «Брайдсдейл»
+Og	Ог	охоронець Стентона
+pillar of truth	стовп істини	Ґудмунд; dumb «стовп їстини»
+old Scratch	Старий Нечистий	ідіома
+Morbihan dogfish	морбіанський катран	
+Black Mountains	Чорні гори	хребет; клан Чорної Гори окремо
+Ellumyn	Еллумін	ельф-майстер, Квінтарра; dumb «Луні»
+Swyft	Свіфт	ельфійка, хоче до Таранта; не відмінюється
+dwarf (жін. звертання)	дворфійко	вок.; орчине, напівогрине — за зразком
+Makaal	Макаал	бог бедокаанів; «батьки-змії» — його культ
+Shakar	Шакар	бог
+Kerlin	Керлін	бог; у source без апострофа
+Bolo	Боло	бог; НЕ відмінюється
+Torg	Торг	бог
+Ter'el	Тер'ел	бог
+Three Circles	Три Кола	спільнота вівтарних богів; род. Трьох Кіл
+Lawrence Brummond	Лоуренс Браммонд	брат Вірджила (справжній; Браммонд — родинне прізвище); вок. Браммонде
+Voighurul	Вірґурул	dumb-спотворення «Вірджил»
+Tomb of Nasrudin	Гробниця Насрудіна	острів Танатос
+Warven	Варвен	страж-оболонка Арронакса (01112)
+Gray Legions	Сірі легіони	військо Кергана
+Amulet of the Molochean Hand	Амулет Руки Молоха	
+Arrow-nacks	Арро-накс	dumb-спотворення «Арронакс»; ЄДИНЕ написання
+Kur-gun	Кергун	dumb-спотворення «Керган» (також Koorigan); ЄДИНЕ написання
+T'val N'or	Т'вал Н'ор	темний маг, колишній господар Мауґа
+Lug	Лаґ	товариш Мауґа; у source також Lugg
+Thrall	Тралл	товариш Мауґа
+Roan's Almanac of All Things Dwarven	«Альманах Роана про все дворфське»	книжка
+lizard man	ящіролюд	бедокаан очима людей; lizard-lover → ящіролюб/ящіролюбка
+Mr. Franklin	пан Френклін	клієнт борделю (01771–01772); НЕ Френклін Пейн
+Herzod Munk	Герзод Мунк	учень-маг у Туллі
+Simon Plough	Саймон Плау	щури в підвалі; Плау НЕ відмінюється
+Sam Longwell	Сем Лонґвелл	журналіст каладонського бюро «Тарантського вісника»
+Cynthia Witt	Синтія Віт	донька Девіда Віта; вок. Синтіє; dumb «Сінтія»
+Tarry Thornpick	Террі Торнпік	половинчик (01922, 01924)
+Renard	Ренар	
+Charles Dolan	Чарльз Долан	крамар
+Malek Nebbs	Малек Неббс	клан Мауґ
+Rolland	Ролленд	пан Ролленд; дружина — пані Ролленд
+Pollock's Gang	банда Поллока	
+Withered Grove	Всохлий гай	місце другого загадника
+Joseph	Джозеф	каменяр у Таранті (01797)
+Willy	Віллі	зменшене від Вільгельміна
+James Legget	Джеймс Леґет	репортер «Тарантського вісника», Каладон
+Robert Milton	Роберт Мілтон	браконьєр, Темні болота
+Vernon	Вернон	змовник у замку Дернгольма
+Bullors	Буллорс	
+Joe Bob Williamson	Джо Боб Вільямсон	селянин; дружина Моллі
+Dragon's Blood	Драконяча Кров	флакон; Басейн Драконячої Крові — окремо
+Ancient Game	Давня Гра	голий половинчик
+Walter Ginsberg	сер Волтер Гінзберг	таблички Беллерогріма
+Jamilah	Джаміла	дружина Арбалага; жіноче ім'я, тому -lah → -ла (на відміну від Арбалага)
+Saif	Саїф	син Арбали
+Prince Auguste Farad	принц Огюст Фарад	
+Crimstone	Крімстоун	слово-пароль потайних дверей гробниці
+Mauger	мауґер	член клану Мауґ; ж. мауґерка
+Glass Key	Скляний ключ	
+Idol of Kree	Ідол Крі	
+Smythe	Смайт	Перріман Смайт; НЕ плутати зі Смайзерсом
+Fa'al Kin	Фа'ал Кін	маг; Лабіринт Фа'ал Кіна
+Jacob Bens	Джейкоб Бенс	замовник пограбування банку в Туманних Пагорбах (діалог Оуенса)
+Hervor	Хервор	недієздатний свідок знищення парового двигуна, Туманні Пагорби
+Thrice Broken Heart	таверна «Тричі розбите серце»	таверна в Роузборо (діалоги Тунів)
+Arland	Арланд	королівство в Арканумі (вживається в 5+ файлах)
+Renford A. Terwilliger	Ренфорд А. Тервілліґер	згадується і як чиновник Комітету з землекористування (Бенч), і як дослідник ельфів (Рейвен)
+Committee on Landworks and Development	Комітет з землекористування та розвитку	тарантська бюрократія (квест Бенча)
+Wextel Lumber	«Векстел Лумбер»	лісозаготівельна компанія (квест Бенча)
+sire	володарю	звертання до монарха (король Претор та ін.); НЕ «государю»
+Gypsy Shadow	«Циганська тінь»	корабель Едварда Тіча
+Jailer's Hump	Горб Тюремника	острів/місце з історій Тіча
+Killian Drake	Кіліан Дрейк	власник «Циганської тіні» (історії Тіча, 02098)
+Lugard Bloodstone	Луґард Кривавий Камінь	готовий персонаж-дворф; дворфські прізвиська перекладаємо
+Merik Laggerton	Мерік Лаґґертон	готовий персонаж
+Ogdin Big Fist	Оґдін Великий Кулак	напівогр-воротар Торвальда; відм. Оґдіна Великого Кулака
+King's Way	Королівський шлях	вулиця в Каладоні
+Regina Halster	Реджина Гелстер	Тарант; родина Гелстерів
+The Thirsty Soul	«Спрагла душа»	заклад
+Scripture	Писання	панарійське; з великої, НЕ «святе письмо»
+the hard way / the easy way	по-поганому / по-доброму	пара реплік агента й Вірджила на місці катастрофи (01714 #110, 01715 #27)
+Stones and blood!	Каміння й кров!	дворфська божба (Маґнус)
+Royal Castle	Королівський замок	Каладон
+merchants quarter	торговельний квартал	
+wards	захисні чари	магічні печаті (розлам, Квінтарра); НЕ «обереги» — оберіг українською насамперед амулет
+City of Mages	Місто Магів	Тулла
+First Temple of the Panarii	Перший храм панаріїв	так само First Panarii Temple
+high priest	верховний жрець	панарії
+offices of archaeology	кабінети археології	храм у Каладоні
+the Stone and the Shape	Камінь і Форма	дворфська філософія (Рандвер); з великих літер
+Royal Chambers	Королівські покої	клан Колеса
+Panarum	панарум	давня мова церкви панаріїв
+Black Mountainers	чорногірці	дворфи клану Чорної Гори
+Gorgothian blood-curse	ґорґотійське криваве прокляття	
+Mr. Chaplaine	пан Чаплейн	гном, колишній господар Оґдіна
+Miriam	Міріам	вчителька Оґдіна
+Jack Skellybone	Джек Скеллібон	пірат із байок Тіча
+Ruby Dirk	Рубі Дірк	байки Тіча
+Black Sam Bellamy	Чорний Сем Беллемі	байки Тіча
+evil eye	знак лихого ока	Тіч
+sour ore	руда «скисла»	шахта Бессі Тун (Персіваль, Сара)
+Stanton Importers	Імпортна компанія «Стентон»	Тарант
+Half Ogre Island	Острів Напівогрів	
+Cap'n	кап'тан	морська говірка (Тіч, капітани)
+haunted castle	привидний замок	Ешбері
+regenerative shell	відновлювальна оболонка	Насрудін; regenerative state → відновний стан
+plane of existence	план буття	
+Necromantic Arts	некромантське мистецтво	
+cold-blood ways	звичаї холодної крові	бедокаани (Кан Керай, Варомон); «шлях» лише для path
+snake-fathers	батьки-змії	бедокаани
+warm-blood	теплокровний	так бедокаани звуть інші раси; sharp-ear → гостровухий
+words of power	слова сили	бедокаани
+Pelojian's Pool	ставок Пелоджіана	відм. ставка / ставком / у ставку Пелоджіана; НЕ «басейн»
+Earl Grey Tea	чай «Ерл Грей»	Перріман
+Howler	Вишак	істота (description.mes); Howling Bog Dweller → виючий болотник
+Corpse Hog	трупний кабан	байки Франкліна Пейна
+Shade Shark	тіньова акула	байки Франкліна Пейна
+fire-gems	вогняні самоцвіти	
+Dreadhound	жахопес	? трапляється лише в байках Пейна
+Sir Garrick (звертання)	сере Ґарріку	кличний відмінок лицарського титулу
+map	мапа	НЕ «карта» (карти — гральні)
+officer (міський)	вартовий	НЕ «офіцер»
+Councilman Braithe	радник Брейт	Тарант (Ґар, газети)
+City of the Air	Місто Повітря	Квінтарра
+mark (кості)	мітка	гра в кості; Snake Eyes → «зміїні очі»; even money → «на рівні гроші»
+Cattan	Каттан	
+Kraka-Tur (кличний)	Крака-Туре	кличний відмінок; у стандартних репліках супутника поки називний — див. morning-notes
+K'an Hua	К'ан Хуа	не відмінюється
+Stinky Feet / Stinky	Смердючі Ноги / Смердючий	dumb-перекручення Stringy Pete
+Kraka-turd	Кака-Тур	dumb-перекручення
+Scourge of Vendigroth	Бич Вендіґрота	
+Thieves Underground	Злодійське підпілля	
+Darryl Willenbecker	Дерил Віленбекер	брат Едварда
+the Bentley	«Бентлі»	готель у Нариві, лігво клану Мауґ
+South Boil	Південний Нарив	
+Dernholm Guard	Дернгольмська варта	
+Pit of Fires	Яма Вогнів	
+Women's Auxiliary	Жіночий допоміжний комітет	
+Gurney	Ґарні	
+Mr. Werther	пан Вертер	
+funerary stone	надгробна плита	? у проєкті ще «похоронний/поховальний/надгробний камінь» — уніфікувати з назвою предмета
+college (magick)	школа (магії)	НЕ «колегія»; Technological Discipline — технологічна дисципліна
+Orcish Champion	орк-поборник	за spell.mes; у description.mes сувій «орківський чемпіон» — уніфікувати
+si'im tala / love-lights	сі'їм тала / вогники кохання	
+Death Lantern	ліхтар смерті	
+penal colony	каторжна колонія	
+Warren Pel Dar	Воррен Пел Дар	
+Lianna Pel Dar	Ліанна Пел Дар	
+John Beddoes	Джон Беддоуз	
+Supernatural Selection	надприродний добір	
+Gregor Seamus Darton	Грегор Шеймус Дартон	
+Steel Clan	клан Сталі	
+Grey Mountain Clan	клан Сірих гір	
+master mage of Tulla	верховний маг Тулли	
+Shadow Stallions	Тіньові Жеребці	
+Elven Great Bow	Великий ельфійський лук	? звірити з назвою предмета
+Island of Death	Острів Смерті	? у Торіана Кела; не плутати з Isle of Despair
+master at arms	наставник із бойової підготовки	
+K'na Ta	К'на Та	руїни
+the flow(s)	потік / потоки	ельфи Квінтарри; next plane — наступний план буття
+members of the press	газетярі	
+Master Bowman	Майстер-лучник	
+magistrate	суддя	
+Grey Wolf Terrace	тераса Сірого Вовка	
+Dragon Turnabout	Драконів розворот	
+concerned citizen(s)	небайдужий громадянин / небайдужі громадяни	самоназва змовників Єнкса
+V'ed Eckes	В'ед Екес	майстер гідромантії; dumb «Ведекс»
+Pervert of Tarant	Збоченець / Збочениця Таранта	
+cat burglar	злодій-верхолаз	
+S'nel N'fa	С'нел Н'фа	замок; не відмінюється
+whipping post	стовп для шмагання	
+satisfaction (дуельне)	сатисфакція	
+Bunny (прізвисько)	Банні; глоса «Зайчик» у жартах	? введено в 01765bunny заради гри слів; узгодити в 01763alice, 01766willow, 01768laura
+poor house	притулок для вбогих	НЕ «богадільня»
+Potion of Darkest Power	зілля найтемнішої сили	
+small stakes (кості)	по малому	
+repeater rifle	багатозарядна гвинтівка	
+trapmaker spectacles	окуляри майстра пасток	як у gamedesc.mes
+Castle Caladon	Каладонський замок	
+handling charge (Підпілля)	плата за клопіт	
+Clan of all Clans	клан усіх кланів	
+Old Sprocket	Стара зірочка	як у gamedesc
+leave the party/group	залишити групу	
+pit dog	пес Ями	
+Bowen Boys	хлопці Боуена	
+Dodge Master	Майстер ухиляння	
+Ogdin	Оґдін	охоронець Торвальда
+Deitrich	Дітріх	Острів Відчаю
+ladies auxiliary (Ашбері)	Дамський комітет	
+smite	скарати	Врат
+lady of the vine	володарка лози	епітет Ґештіанни
+Place of Iron	Місце Заліза	
+the Shape and the Stone	Форма і Камінь	
+Durin Stone	Камінь Дуріна	
+Caladonian Guard	Каладонська варта	
+dwarf (жін.)	дворфійка	
+Kree Shrunken Head	засушена голова з Крі	
+Caladon's highest security dungeon	каладонська в'язниця найсуворішого режиму	? звучить сучасно
+stonecutter (ремесло)	каменяр	«Каменетеси» — лише клан
+salvage merchant	лахмітник	
+techie	технар / технарка	
+advisor's chambers	покої радників	Каладон
+Unified Battalions	Об'єднані батальйони	
+Alignment	світогляд	як у charedit.mes
+North Boil	Північний Нарив	
+honorary ambassadorship	звання почесного посла	
+boss (ватажки Нариву)	ватажок	НЕ «бос»
+matchbook	сірниковий коробок	
+subterranean kiosk	підземний кіоск	вхід до підземки на Кенсінґтон-Бродвеї
+Desaille	Дезай	вулиця
+Mystery Lane	провулок Таємниць	
+Mother Tilley	матуся Тіллі	
+Mellin Bungerton	Мелін Бангертон	
+the Boil (род.)	Нариву	НЕ «Нарива»
+Headmaster (Тулла)	ректор	
+Master Illusionist	Майстер-ілюзіоніст	
+L.N. Renford	Л. Н. Ренфорд	
+business partner	компаньйон	Ренфорд і Торнпік
+fireball tourney	турнір з вогняних куль	
+great mage (звертання)	великий маже / велика чарівнице	за статтю майстра
+electrical discipline	електрична дисципліна	
+Maxim Machinery	Машини Максима	
+the Silver One	Срібна	дитяче ім'я Срібної Пані у вустах Насрудіна; the bright one — Ясна
+[Give him the coins]	[Віддати йому монети.]	стандартна ремарка
+S'yala	С'яла	майстриня школи часу; кл. С'яло
+Ferko Lydell	Ферко Лайделл	кл. Ферку
+Bilko Gavin	Білко Ґевін	
+Daemon Gardi	Деймон Ґарді	
+intruder	зайда	спільного роду; кл. зайдо
+pamphlet	брошура	НЕ «памфлет» (то сатиричний твір)
+Mazzerin's Mystery	Таємниця Маццеріна	
+Mechanized Gun	механізована рушниця	як у description.mes
+half-ogre (жін.)	напівогриня	
+Mr. X	пан Ікс	
+shrunken (стан гравця)	здрібнілий	
+warden (в'язниця)	наглядач	
+Pilgrim's Robes	Шати прочанина	як у gamedesc; pilgrim — прочанин
+concessions (договір про Каладон)	пільги	НЕ «поступки»; grain tariff — мито на зерно
+Kite (раса)	кайти	
+half-breed	покруч	жін. покручка; кл. покручу / покручко
+Grunt (орк)	вояк	
+Widower	вдівець	
+Lizard Woman	ящіролюдка	
+Manuals (предмети)	посібники з …	
+Battery	акумулятор	
+Falchion	фальшіон	
+Medallion of Beauty	Медальйон Краси	
+Sorcerous Beast	чародійний звір	з малої
+Gem of Water Purification	Самоцвіт Очищення Води	
+Willbecker Gang	банда Віллбекера	
+Erick Obsidian	Ерік Обсидіан	
+Gaylin	Ґейлін	жінка
+N'Tala	Н'Тала	
+Shrouded Hills Inn	заїзд Туманних Пагорбів	
+Ring of Virility	Перстень мужності	
+Bleeding Rose Inn	«Закривавлена троянда»	
+Oliver Bettington	Олівер Беттінґтон	лорд Беттінґтон
+Charm Beast	Чари на звіра	176 px; «Причарування звіра» не влазить
+Summon Undead	Приклик нежиті	176 px
+Succour Beast	Звір-помічник	закляття прикликає звіра-бійця
+Stun	Приголомшення	і в бою, і закляття
+Locked / Unlocked	Замкнено / Відімкнено	НЕ «відчинено»
+Hunley	Ганлі	професор Олдос Ганлі; НЕ «Гантлі»
+Mummer's Dance	«Танець ряджених»	НЕ «мамери»
+Mage Tribunal	Магічний трибунал	
+Dixon's Landing	пристань Діксона	
+the Crow (кодове ім'я Тайрона)	Ворона	НЕ «Рейвен»
+Mr. T	Містер Ті	
+Tarant Union	Тарантський союз	
+orcish	орківський	НЕ «орочий»
+undead	нежить	
+Merik Luggerton	Мерік Лаґґертон	в EN два написання
+Hall of Applied Magicks	Палата Прикладної Магії	
+Kathorin (окуляри Торвальда)	кристал катхорн	= Kathorn
+Elven Spring Water	Ельфійська джерельна вода	
+dwarven snuff	дворфський нюхальний тютюн	
+
+saboteur	диверсант	sabotage — саботаж
+the robed ones / robed figures	ті, що в мантіях / постаті в мантіях	
+Virgil (dumb-перекручення)	Віргол (Virgo), Войгіл (Voigil), Войбал (Voibal), Віролопіс, Вогхклюрх, Воїргу (Voirgoo)	де в EN «Virgil» правильно — і в dumb «Вірджил»
+Joachim (dumb)	Ва-а-кім / Ва-кім	Pits of Dernholm	Дернгольмські Ями	
+Stone Wall Mountains	гори Кам'яної Стіни	
+rift (Арканум — Порожнеча)	розлом	НЕ «розколина»
+evil one (звертання до злого гравця)	лиходію / лиходійко	НЕ «Лихий» — то пророчий титул антагоніста

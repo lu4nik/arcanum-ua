@@ -1,0 +1,111 @@
+// These are class-based PC messages, said to male NPC's based on their
+// class.
+
+// Appreciation (thanks) messages start at 1000. Each class gets 50
+// messages starting on multiples of 50
+
+// noble
+{1000}{Тобі дякувати.}
+
+// priest
+{1050}{Тобі дякувати.}
+
+// wizard
+{1100}{Тобі дякувати, страшний дядько.}
+
+// technologist
+{1150}{Тобі дякувати, на-у-ко-вий пане.}
+
+// shopkeeper
+{1200}{Дяка!}
+
+// guard
+{1250}{Тобі дяка!}
+
+// city_dweller
+{1300}{Тобі дякувати, гарний дядько.}
+
+// villager
+{1350}{Дяка.}
+
+// beggar
+{1400}{Дяка, старий дядько.}
+
+// thief
+{1450}{Дяка!}
+
+// bandit
+{1500}{Дяка.}
+
+// Asking for rumors messages start at 2000. Each class gets 50
+// messages starting on multiples of 50
+
+// noble
+{2000}{Ти казати моя чутка?}
+
+// priest
+{2050}{Ти казати, що новина для моя?}
+
+// wizard
+{2100}{Що то чутки штука?}
+
+// technologist
+{2150}{Що то новини, дядько-пане?}
+
+// shopkeeper
+{2200}{Що то чутки бути новини?}
+
+// guard
+{2250}{Що то чутьба або новини?}
+
+// city_dweller
+{2300}{Це місто велике! Багато всього бути! У ти є чутка?}
+
+// villager
+{2350}{Казати моя новина-чутка?}
+
+// beggar
+{2400}{Казати моя новина-чутка?}
+
+// thief
+{2450}{Ти казати моя чутка-новина зараз.}
+
+// bandit
+{2500}{Ти казати моя чутка-новина зараз?}
+
+
+// Insult messages start at 3000. Each class gets 50 messages starting
+// on multiples of 50
+
+// noble
+{3000}{Ти смердюча пика!}
+
+// priest
+{3050}{Ти смішно виглядати.}
+
+// wizard
+{3100}{Ти бліда макітра!}
+
+// technologist
+{3150}{Ти дурний дядько.}
+
+// shopkeeper
+{3200}{Ти бридкий дурний дядько.}
+
+// guard
+{3250}{Злий дурний дядько!}
+
+// city_dweller
+{3300}{Моя не любити ти, дурний дядько!}
+
+// villager
+{3350}{Дурник-дурна голова!}
+
+// beggar
+{3400}{Смердючий дядько-пан!}
+
+// thief
+{3450}{Дурна орчача пика!}
+
+// bandit
+{3500}{Ти смердюча бридка дурна голова.}

@@ -1,0 +1,36 @@
+// These are race-based NPC messages, said by dumb male NPC's to female PC's
+// based on the PC's race
+
+// Insult messages start at 1000.
+
+{1000}{Ти дурна й бридка, дівчинко!}
+
+
+
+// Initial bad greeting messages start at 2000. 
+
+{2000}{Що ти хотіти?!}
+
+
+
+// Initial worst greeting messages start at 3000.
+
+{3000}{Моя не хотіти говорити з ти.}
+
+
+// Second bad greeting messages start at 4000. 
+
+{4000}{Чому ти знову тут? Ти не подобатися моя!}
+
+
+
+// Second worst greeting messages start at 5000. 
+
+{5000}{Моя все ще не хотіти говорити з ти!}
+
+
+
+// Shrink spell messages start at 6000. 
+
+{6000}{Чому ти така малесенька?}
+

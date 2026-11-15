@@ -1,0 +1,112 @@
+// These are the general messages said by a PC to a female NPC
+
+// Yes messages go between 1 and 99
+{1}{Ага.}
+{2}{Добре.}
+
+// No messages go between 100 and 199
+{100}{Не-а.}
+{101}{Ні.}
+
+// Sorry messages go between 200 and 299
+{200}{Моя перепрошувати.}
+{201}{Моя тепер погано. Моя перепрошувати.}
+
+// Barter messages go between 300 and 399
+{300}{Ми міняти речі.}
+
+// Exit messages go between 400 and 499
+{400}{Бу-бай.}
+{401}{Га... па-па.}
+
+
+// Ask for training messages go between 500 and 599
+{500}{Моя треба навчання.}
+
+// Continue messages goes between 600 and 699
+{600}{[далі]}
+
+// Ask for healing messages go between 700 and 799
+{700}{Моя треба лікувати.}
+{701}{Моя боляче!}
+
+// Forget it messages go between 800 and 899
+{800}{Не треба.}
+
+// Use skill messages go between 900 and 999
+{900}{Моя хотіти твоя навичка %s.}
+
+// Use spell messages go between 1000 and 1099
+{1000}{Робити твоє закляття %s.}
+
+// Asking to heal wounds messages go between 1100 and 1199
+{1100}{Ти робити магія — і біль геть?}
+
+// Asking to heal poison messages go between 1200 and 1299
+{1200}{Зробити, щоб погана отрута йти геть.}
+
+// Asking for directions messages go between 1300 and 1399
+{1300}{Моя загубитися.}
+
+// Asking for map-marking messages go between 1400 and 1499
+{1400}{Моя загубитися. Тицьнути на мапа, будь ласка.}
+
+// Asking for more questions go between 1500 and 1599
+
+{1500}{Моя питати ще?}
+
+// Bartering with follower messages go between 1600 and 1699
+
+{1600}{Моя дивитися твої речі?}
+
+// Story state messages go between 1700 and 1799
+
+{1700}{Ти знати про перстень? [Описати перстень.]}
+{1701}{Що бути Пі Скай-лер?}
+{1702}{Хто Гілбур Бейтс?}
+{1703}{Ти знати про Гілбур Бейтс?}
+{1704}{Що ти знати про клан Чорна Гора?}
+{1705}{Де Острів Від-чай?}
+{1706}{Що ти знати про Острів Від-чай?}
+{1707}{Що ти знати про клан Ко-лесо?}
+{1708}{Де місто ельф?}
+{1709}{Що ти знати про місто ельф?}
+{1710}{Хто бути Ренфурд Ей Тервілліґер?}
+{1711}{Де моя взяти «Жах серед темний ельф»?}
+{1712}{Що ти знати про Каль-дон?}
+{1713}{Що ти знати про Віктер Міск?}
+{1714}{Що ти знати про темний ельф?}
+{1715}{Що ти знати про Ароу-накс?}
+{1716}{Що ти знати про Насрю-дін?}
+{1717}{Що ти знати про острів Тан-тоз?}
+{1718}{Що ти знати про руїни Вен-да-грот?}
+{1719}{Що ти знати про Коло Брод-ґар?}
+{1720}{Де бути Ароу-накс?}
+{1721}{Що ти знати про Порожнеча?}
+{1722}{Що ти знати про книга Погибель Керган?}
+{1723}{Що ти знати про Керган?}
+{1724}{Гей! Моя треба завдання!}
+
+// Who are you? messages go between 1800 and 1899
+
+{1800}{Хто ти?}
+{1801}{Хто ти бути?}
+
+// asking for a newspaper messages go between 1900 and 1999
+{1900}{Моя хотіти газета.}
+{1901}{У ти є газети?}
+
+// asking for the headline of today's newspaper go between 2000 and 2099
+{2000}{Що казати газета сьогодні?}
+{2001}{Казати моя, що газета сьогодні казати.}
+
+// asking for older newspapers go between 2100 and 2199
+{2100}{Моя хотіти старі газети.}
+{2101}{У ти є стара газета?}
+
+// asking to buy todays newspaper go between 2200 and 2299
+{2200}{Моя хотіти купити сьогодні газета.}
+{2201}{Дати газета сьогодні.}
+
+// wants to start the WorldMap
+{2300}{[відкрити мапу світу]}

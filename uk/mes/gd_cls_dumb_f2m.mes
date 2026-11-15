@@ -1,0 +1,131 @@
+// These are class-based NPC messages, said by dumb female NPC's to male PC's
+
+// Asking for money messages start at 1000. 
+
+{1000}{Моя хотіти грошей: %d. Добре?}
+
+
+// Not enough money messages start at 2000. 
+
+{2000}{Ти не мати гроші!}
+
+
+
+// Offers to train a beginner cannot 3000. 
+
+{3000}{Чого вчити ти хотіти?}
+
+
+
+// Already trained messages start at 4000. 
+
+{4000}{Ти вже знати то!}
+
+
+
+// Not ready to train messages start at 5000. 
+
+{5000}{Ти ще мало знати.}
+
+
+
+// Did training messages start at 6000. 
+
+{6000}{Ти тепер учень!}
+
+
+
+// No rumors messages start at 7000. 
+
+{7000}{Моя нічого не знати.}
+
+
+
+// Initial great greeting messages start at 8000. 
+
+{8000}{Привіт! Моя любити ти!}
+
+
+
+// Initial good greeting messages start at 9000. 
+
+{9000}{Привіт!}
+
+
+// Initial neutral greeting messages start at 10000. 
+
+{10000}{Е?}
+
+
+
+// Second great greeting messages start at 11000. 
+
+{11000}{Знову привіт! Моя все ще любити ти!}
+
+
+// Second good greeting messages start at 12000. 
+
+{12000}{Моя бачити ти знову! Знову привіт!}
+
+
+
+// Second neutral greeting messages start at 13000. 
+
+{13000}{Уг.}
+
+
+// Offer healing messages start at 14000. 
+
+{14000}{Що лікувати ти хотіти?}
+
+
+
+// Finished messages start at 15000. 
+
+{15000}{Моя закінчити.}
+
+
+
+
+// Greeting a PC in underwear messages start at 16000. 
+
+{16000}{Моя бачити твої причандали!}
+
+
+
+
+// Greeting a PC in barbarian armor messages start at 17000. 
+
+{17000}{Ти як справжній сильний дядько.}
+
+
+
+
+// Fear of associates messages start at 18000. 
+
+{18000}{Твої друзі смердіти.}
+
+
+
+// Body spell messages start at 19000. 
+
+{19000}{Ти смішно виглядати.}
+
+
+
+
+// Polymorph messages start at 20000. 
+
+{20000}{Привіт. Ти обід?}
+
+
+// Mirror image messages start at 21000. 
+
+{21000}{UNUSED}
+
+
+
+
+// Invisibility messages start at 22000. 
+
+{22000}{Моя не бачити ти!}
