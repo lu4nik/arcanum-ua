@@ -55,7 +55,25 @@ def main():
                 if any(wc.one_line_width(fnt, p) > COL_W for p in parts):
                     print(f'{key}: {name}: слово {word!r} = {w} px > {COL_W}'); bad += 1
     bad += flow(os.path.join(ROOT, 'uk', 'mes', 'gamenewspaper.mes'))
+    bad += prefixes()
     print(f'{bad} проблем')
+
+
+def prefixes():
+    """The engine skips exactly one separator after '<font><l|c>'; anything else
+    (e.g. ' \\t' where the original has '\\t') becomes part of the first word,
+    which is then too wide and the whole line disappears. Prefixes must match
+    the original byte for byte."""
+    rx = re.compile(r'\{(\d+)\}\{(\d+[lc][ \t]*)')
+    src = open(os.path.join(ROOT, 'source', 'mes', 'gamenewspaper.mes'), encoding='cp1252').read()
+    uk = open(os.path.join(ROOT, 'uk', 'mes', 'gamenewspaper.mes'), encoding='utf-8').read()
+    want = {m.group(1): m.group(2) for m in rx.finditer(src)}
+    bad = 0
+    for m in rx.finditer(uk):
+        key, got = m.group(1), m.group(2)
+        if key in want and got != want[key]:
+            print(f'{key}: префікс {got!r}, в оригіналі {want[key]!r}'); bad += 1
+    return bad
 
 
 COLS = [175, 175, 270, 270]  # column heights (written_ui_newspaper_content_rects 1..4)
