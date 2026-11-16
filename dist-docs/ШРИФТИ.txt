@@ -11,10 +11,10 @@
   https://fonts.google.com/specimen/Forum
   меню, назви газет і частина шрифтів інтерфейсу
 
-* PT Serif, PT Serif Caption, PT Sans, PT Sans Narrow — ParaType, ParaType Free Font License
+* PT Serif, PT Serif Caption, PT Sans, PT Sans Narrow, PT Mono — ParaType, ParaType Free Font License
   https://www.paratype.com/fonts/pt/pt-serif
   діалоги (flare12/flare14), книжки (casablanca16), газета (garmond, swiss921),
-  жирний і вузький шрифти інтерфейсу
+  жирний і вузький шрифти інтерфейсу, телеграми (clarendonblk18, courier10)
 
 * Cormorant Unicase — Copyright 2015 the Cormorant Project Authors,
   SIL Open Font License 1.1

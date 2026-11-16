@@ -111,6 +111,9 @@ RULES = [
     ('опис техдисципліни (інфо-панель)', 'mes/tech.mes', ANY, 'flare12', 291, 0),
     ('опис на екрані персонажа (інфо-панель)', 'mes/charedit.mes', ANY, 'flare12', 291, 0),
     ('заголовок журналу (187x19)', 'mes/logbk_ui.mes', ANY, 'morph15', 187, 1),
+    # intgame.c intgame_examine_item: effects line, rect 291x18 = ONE line, the rest is cut
+    ('рядок ефектів предмета (291x18, один рядок)', 'mes/item_effect.mes', ANY, 'flare12', 291, -1),
+    ('рядок ефектів предмета модуля (291x18)', 'mes/gameitemeffect.mes', ANY, 'flare12', 291, -1),
 ]
 
 
@@ -134,8 +137,12 @@ def check_rules():
             # one-line rules apply to NAMES only: descriptions share key ranges
             src = en.get(e['key'].strip(), '')
             is_name = not (len(src) > 48 or src.rstrip().endswith('.') or '\n' in src)
-            if (maxl == 1) != is_name:
+            if maxl == -1:
+                maxl_e = 1  # every entry, name or not
+            elif (maxl == 1) != is_name:
                 continue
+            else:
+                maxl_e = maxl
             if maxl == 0:
                 # description: the panel is 2, 3 or 5 lines tall, sized for the original
                 need = len(layout(fnt, src.encode('cp1252', 'replace').decode('cp1251', 'replace'), width))
@@ -145,10 +152,10 @@ def check_rules():
                     bad.append((got * 100 + allowed, k, f'[{got} рядків, місця на {allowed}] ' + v))
                 continue
             lines = layout(fnt, v, width)
-            if len(lines) > maxl or -1 in lines:
+            if len(lines) > maxl_e or -1 in lines:
                 # the original overflowing too means vanilla behaves the same: not our bug
                 el = layout(fnt, src.encode('cp1252', 'replace').decode('cp1251', 'replace'), width) if src else []
-                if src and (len(el) > maxl or -1 in el):
+                if src and (len(el) > maxl_e or -1 in el):
                     vanilla += 1
                     continue
                 bad.append((one_line_width(fnt, v), k, v))

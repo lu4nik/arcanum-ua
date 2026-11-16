@@ -9,6 +9,7 @@ Usage:
   python3 tools/genfont.py art/interface/flare12font.art \
       "/System/Library/Fonts/Supplemental/Georgia Bold.ttf" fonts/flare12font.art
   --track N  (optional 4th arg) adds N px to every Cyrillic advance (e.g. -1 to tighten)
+  --cap N    render Cyrillic with cap height N px instead of the original Latin one
 """
 import os, sys
 
@@ -147,7 +148,8 @@ def main():
     m = measure(orig)
     print(f'{src_name}: cell_h={m["h"]} cap_h={m["cap_h"]} baseline={m["baseline"]} '
           f'pad={m["pad"]} ramp={len(m["ramp"])} steps')
-    font = pick_size(ttf_path, m['cap_h'])
+    cap = int(sys.argv[sys.argv.index('--cap') + 1]) if '--cap' in sys.argv else m['cap_h']
+    font = pick_size(ttf_path, cap)
     for ch in CP1251_CHARS:
         frame_idx = cp1251_byte(ch) - 31
         fr = render_glyph(font, ch, m)

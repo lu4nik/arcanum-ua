@@ -23,9 +23,9 @@ UK = os.path.join(ROOT, 'uk')
 FONTS = os.path.join(ROOT, 'fonts')
 DOCS = os.path.join(ROOT, 'dist-docs')
 
-# The 23 interface fonts the game loads; dev-only A/B and preview renders are excluded.
+# The 25 interface fonts the game loads; dev-only A/B and preview renders are excluded.
 INTERFACE_FONTS = [
-    'arial10', 'arialb12', 'casablanca16', 'casablancaantique30', 'cloister18', 'euph30',
+    'arial10', 'arialb12', 'casablanca16', 'clarendonblk18', 'courier10', 'casablancaantique30', 'cloister18', 'euph30',
     'flare12', 'flare14', 'garmond6', 'garmond8', 'garmond9', 'georgia30', 'latinxcn30',
     'morph15', 'morph30', 'newtimes16', 'nick16', 'pepper20', 'pork12',
     'roller', 'swiss921', 'zurich16', 'zurich20',
