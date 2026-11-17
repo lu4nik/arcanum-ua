@@ -17,7 +17,7 @@ from urllib.parse import urlparse, parse_qs
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, 'tools'))
-import aipack, arcfmt, dlggraph, livecheck, qa, sheet
+import aipack, arcfmt, dlggraph, glosscheck, livecheck, qa, sheet
 
 STATIC = os.path.join(ROOT, 'tools', 'editor')
 LOCK = threading.Lock()
@@ -116,6 +116,7 @@ def file_meta(rel):
 def build_meta():
     for row in status_rows():
         try:
+            tm_update(row['path'])
             _meta[row['path']] = file_meta(row['path'])
         except (OSError, ValueError) as e:
             _meta[row['path']] = {'title': title_of(row['path']), 'kind': 'talk', 'greet': '',
@@ -126,9 +127,156 @@ def build_meta():
 def refresh_meta(rels):
     for rel in rels:
         try:
+            tm_update(rel)
             _meta[rel] = file_meta(rel)
         except (OSError, ValueError):
             pass
+
+
+# ---------- glossary (glossary/glossary.tsv: en, uk, note; EN may repeat) ----------
+
+GLOSSARY = os.path.join(ROOT, 'glossary', 'glossary.tsv')
+_gl = {'mtime': None, 'rows': []}
+
+
+def gl_rows():
+    """[{i (line index), en, uk, note, rx, low, st}] — header and blank lines skipped."""
+    m = os.path.getmtime(GLOSSARY)
+    if _gl['mtime'] != m:
+        rows = []
+        for i, line in enumerate(open(GLOSSARY, encoding='utf-8').read().split('\n')):
+            c = line.split('\t')
+            if i == 0 or len(c) < 2 or not c[0].strip() or not c[1].strip():
+                continue
+            en = c[0].strip()
+            term = re.sub(r'\s*\(.*?\)\s*', ' ', en).strip()  # "Gorgoth (істота)" -> "Gorgoth"
+            proper = term[:1].isupper()
+            rx = re.compile(r'(?<![A-Za-z])' + re.escape(term) + (r'(?![a-z])' if proper else r"(?:s|es|'s)?(?![A-Za-z])"),
+                            0 if proper else re.I)
+            rows.append({'i': i, 'en': en, 'uk': c[1].strip(), 'note': c[2].strip() if len(c) > 2 else '',
+                         'rx': rx, 'low': term.lower(), 'st': glosscheck.stems(c[1].strip())})
+        _gl.update(mtime=m, rows=rows)
+    return _gl['rows']
+
+
+def gl_public(g):
+    return {k: g[k] for k in ('i', 'en', 'uk', 'note')}
+
+
+def terms_for(en, uk, kind='npc'):
+    """Glossary rows whose EN term occurs in en; ok = the UK form is present in uk.
+    Rows marked "(dumb...)" apply to dumb-PC lines only; rows with the same
+    EN+UK are merged (their notes joined)."""
+    out, seen, low_en, low_uk = [], {}, en.lower(), uk.lower()
+    for g in gl_rows():
+        if ('dumb' in g['en'].lower()) != (kind == 'dumb') and 'dumb' in g['en'].lower():
+            continue
+        if g['low'] in low_en and g['rx'].search(en):
+            key = (g['low'], g['uk'])
+            if key in seen:
+                if g['note'] and g['note'] not in seen[key]['note']:
+                    seen[key]['note'] = (seen[key]['note'] + ' | ' + g['note']).strip(' |')
+                continue
+            ok = any(all(s in low_uk for s in alt) for alt in g['st']) if g['st'] else (g['uk'].lower() in low_uk)
+            seen[key] = {**gl_public(g), 'ok': ok}
+            out.append(seen[key])
+    return out
+
+
+def api_glossary(q):
+    term = (q.get('q') or '').strip().lower()
+    rows = [gl_public(g) for g in gl_rows()
+            if not term or term in g['en'].lower() or term in g['uk'].lower() or term in g['note'].lower()]
+    return {'rows': rows[:400], 'total': len(rows)}
+
+
+def api_glossary_save(body):
+    """add: append a row. update/delete: row i, refused unless the line still
+    equals what the page showed (expect) — glossary is shared by all sessions."""
+    clean = lambda v: re.sub(r'[\t\r\n]+', ' ', str(v or '')).strip()
+    act = body.get('action')
+    en, uk, note = clean(body.get('en')), clean(body.get('uk')), clean(body.get('note'))
+    if act in ('add', 'update') and (not en or not uk):
+        return {'ok': False, 'errors': ['потрібні EN і UK']}
+    with LOCK:
+        lines = open(GLOSSARY, encoding='utf-8').read().split('\n')
+        new = '\t'.join([en, uk, note]) if note else '\t'.join([en, uk, ''])
+        if act == 'add':
+            if any(l.split('\t')[:2] == [en, uk] for l in lines):
+                return {'ok': False, 'errors': [f'рядок «{en} → {uk}» уже є']}
+            while lines and lines[-1] == '':
+                lines.pop()
+            lines.append(new)
+            lines.append('')
+        elif act in ('update', 'delete'):
+            ex = body.get('expect') or {}
+            want = [ex.get('en', ''), ex.get('uk', '')]
+            i = int(body.get('i', -1))
+            match = lambda l: [c.strip() for c in l.split('\t')[:2]] == want and \
+                (l.split('\t')[2].strip() if l.count('\t') >= 2 else '') == ex.get('note', '')
+            if not (0 < i < len(lines) and match(lines[i])):
+                hits = [k for k, l in enumerate(lines) if k and match(l)]
+                if len(hits) != 1:
+                    return {'ok': False, 'errors': ['рядок глосарія змінено поза редактором — онови список']}
+                i = hits[0]
+            if act == 'update':
+                lines[i] = new
+            else:
+                del lines[i]
+        else:
+            return {'ok': False, 'errors': ['action: add | update | delete']}
+        tmp = GLOSSARY + '.editor-tmp'
+        with open(tmp, 'w', encoding='utf-8', newline='') as fh:
+            fh.write('\n'.join(lines))
+        os.replace(tmp, GLOSSARY)
+    return {'ok': True}
+
+
+# ---------- translation memory: same EN text elsewhere (as tools/tmcheck.py slots) ----------
+
+_tm, _tm_files = {}, {}
+
+
+def _tm_entries(rel):
+    src, uk = load(rel)
+    out = []
+    for s, u in zip(src, uk):
+        intel = s['intelligence'].strip()
+        num = int(_d(s['num'], 'latin1').strip() or 0)
+        fields = [('pc-dumb' if intel.startswith(b'-') else 'pc', 'text')] if intel else [('npc', 'text'), ('npcf', 'female')]
+        for slot, f in fields:
+            en = ' '.join(_d(s[f], 'cp1252').split())
+            if len(en) < 4 or livecheck.ENGINE.match(en):
+                continue
+            out.append(((slot, en), (rel, num, ' '.join(_d(u[f], 'utf-8').split()))))
+    return out
+
+
+def tm_update(rel):
+    for key, loc in _tm_files.pop(rel, []):
+        lst = _tm.get(key)
+        if lst:
+            _tm[key] = [x for x in lst if x[:2] != loc[:2]]
+    ent = _tm_entries(rel)
+    _tm_files[rel] = ent
+    for key, loc in ent:
+        _tm.setdefault(key, []).append(loc)
+
+
+def tm_for(rel, num, slot, en, uk):
+    """Other places with the same EN in the same slot: {'same': n, 'other': [{uk, n, at}]}."""
+    if not _meta_state['ready']:
+        return None
+    lst = [x for x in _tm.get((slot, ' '.join(en.split())), []) if (x[0], x[1]) != (rel, num)]
+    if not lst:
+        return None
+    mine = ' '.join(uk.split())
+    groups = {}
+    for r, n, u in lst:
+        groups.setdefault(u, []).append(f'{r}#{n}')
+    other = [{'uk': u, 'n': len(at), 'at': at[:4]} for u, at in groups.items() if u != mine]
+    other.sort(key=lambda x: -x['n'])
+    return {'same': len(groups.get(mine, [])), 'other': other[:5]}
 
 
 INDEX = os.path.join(ROOT, 'docs', 'dlg-index.tsv')
@@ -194,6 +342,15 @@ def api_dialog(q):
     rel = _safe_rel(q.get('path'))
     src, uk = load(rel)
     recs = [record_view(s, u) for s, u in zip(src, uk)]
+    for r in recs:
+        if r['blank'] or livecheck.ENGINE.match(r['en']):
+            continue
+        r['terms'] = terms_for(r['en'] + ' ' + r.get('enf', ''), r['uk'] + ' ' + r.get('ukf', ''), r['kind'])
+        if r['kind'] == 'npc':
+            r['tm'] = {'M': tm_for(rel, r['num'], 'npc', r['en'], r['uk']) if r['en'].strip() else None,
+                       'F': tm_for(rel, r['num'], 'npcf', r['enf'], r['ukf']) if r['enf'].strip() else None}
+        else:
+            r['tm'] = {'M': tm_for(rel, r['num'], 'pc-dumb' if r['kind'] == 'dumb' else 'pc', r['en'], r['uk'])}
     graph = dlggraph.build(src, 'cp1252')
     for n in graph['nodes']:  # the UI takes texts from records; keep the graph light
         n.pop('text'), n.pop('female')
@@ -259,6 +416,7 @@ def api_save(body):
         refresh_meta([rel])
         src, uk = load(rel)
     rec = next(record_view(s, u) for s, u in zip(src, uk) if _d(s['num'], 'latin1').strip() == key)
+    rec['terms'] = terms_for(rec['en'] + ' ' + rec.get('enf', ''), rec['uk'] + ' ' + rec.get('ukf', ''), rec['kind'])
     return {'ok': True, 'notes': notes, 'qa': problems, 'record': rec}
 
 
@@ -370,6 +528,8 @@ class Handler(BaseHTTPRequestHandler):
                 return self._send(200, api_dialog(q))
             if u.path == '/api/search':
                 return self._send(200, api_search(q))
+            if u.path == '/api/glossary':
+                return self._send(200, api_glossary(q))
             name = 'index.html' if u.path in ('/', '/index.html') else u.path.lstrip('/')
             if not re.fullmatch(r'[\w\-]+\.(html|js|css)', name):
                 return self._send(404, {'error': 'not found'})
@@ -390,6 +550,8 @@ class Handler(BaseHTTPRequestHandler):
                 return self._send(200, api_check(body))
             if self.path == '/api/save':
                 return self._send(200, api_save(body))
+            if self.path == '/api/glossary':
+                return self._send(200, api_glossary_save(body))
             if self.path == '/api/index':
                 return self._send(200, api_index_save(body))
             if self.path == '/api/pack':

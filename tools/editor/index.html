@@ -15,6 +15,7 @@
   <span id="file-title"></span>
   <label class="toggle"><input type="checkbox" id="only-problems"> лише проблемні</label>
   <label class="toggle"><input type="checkbox" id="show-graph" checked> граф</label>
+  <button id="gl-open" title="Пошук і редагування glossary/glossary.tsv">Глосарій</button>
   <button id="ai-open" title="Контекстний пакет для іншого ШІ та імпорт його відповіді">ШІ-пакет</button>
 </header>
 <main>
@@ -78,6 +79,18 @@
     </div>
     <div id="imp-list"></div>
   </section>
+</dialog>
+<dialog id="gl" class="modal">
+  <div class="ai-head">
+    <strong>Глосарій</strong>
+    <input id="gl-q" type="search" placeholder="Пошук EN / UK / коментар" autocomplete="off">
+    <button id="gl-add" class="primary">+ Додати термін</button>
+    <span id="gl-info" class="muted"></span>
+    <span class="grow"></span>
+    <button id="gl-close" title="Закрити (Esc)">✕</button>
+  </div>
+  <div id="gl-form-slot"></div>
+  <div id="gl-list"></div>
 </dialog>
 <div id="toast" hidden></div>
 <script src="app.js"></script>

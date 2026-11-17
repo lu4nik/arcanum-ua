@@ -98,9 +98,9 @@ textarea.dirty { border-color: var(--accent); }
   .pair { grid-template-columns: 1fr; }
 }
 
-#ai { width: min(1100px, 94vw); height: min(860px, 92vh); padding: 0; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); color: var(--ink); }
-#ai[open] { display: flex; flex-direction: column; }
-#ai::backdrop { background: rgba(0,0,0,.35); }
+#ai, #gl { width: min(1100px, 94vw); height: min(860px, 92vh); padding: 0; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); color: var(--ink); }
+#ai[open], #gl[open] { display: flex; flex-direction: column; }
+#ai::backdrop, #gl::backdrop { background: rgba(0,0,0,.35); }
 .ai-head { display: flex; gap: 6px; padding: 8px 10px; border-bottom: 1px solid var(--line); }
 .ai-head .tab.active { border-color: var(--accent); color: var(--accent); }
 .grow { flex: 1; }
@@ -158,3 +158,20 @@ textarea.dirty { border-color: var(--accent); }
 .ix-form { display: grid; gap: 6px; margin-top: 8px; }
 .ix-form label { display: grid; grid-template-columns: 70px 1fr; gap: 8px; align-items: center; font-size: 12px; color: var(--muted); }
 .ix-form input { font: inherit; color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 4px 8px; }
+
+.terms, .tm { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; align-items: center; font-size: 11px; }
+.terms .lab, .tm .lab { color: var(--muted); }
+.term { font-size: 11px; border-radius: 4px; padding: 1px 6px; border: 1px solid var(--line); cursor: pointer; background: var(--panel); color: var(--ink); }
+.term.ok { border-color: color-mix(in srgb, var(--fl) 60%, var(--line)); }
+.term.miss { border-color: var(--warn); color: var(--warn); }
+.term:hover { background: var(--bg); }
+.tm .var { border: 1px dashed var(--line); border-radius: 4px; padding: 1px 6px; display: inline-flex; gap: 6px; align-items: baseline; }
+.tm .var button { font-size: 10px; padding: 0 5px; }
+.link-btn { background: none; border: none; color: var(--sel); padding: 0; font-size: 11px; cursor: pointer; }
+#gl-q { flex: 1; min-width: 160px; }
+#gl-list { flex: 1; overflow: auto; padding: 0 10px 10px; }
+.gl-row { display: grid; grid-template-columns: minmax(140px, 1fr) minmax(140px, 1fr) 2fr auto; gap: 10px; padding: 5px 4px; border-bottom: 1px solid var(--line); font-size: 13px; align-items: baseline; }
+.gl-row .n { color: var(--muted); font-size: 12px; }
+.gl-row.hl { background: color-mix(in srgb, var(--sel) 12%, transparent); }
+.gl-form { display: grid; grid-template-columns: 1fr 1fr 2fr auto auto; gap: 6px; padding: 8px 10px; border-bottom: 1px solid var(--line); background: var(--bg); }
+.gl-form input { font: inherit; color: var(--ink); background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 4px 8px; }

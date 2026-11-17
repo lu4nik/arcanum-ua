@@ -282,10 +282,14 @@ function recEl(r, node) {
       el('div', { class: 'en', text: same && hasM ? '' : r.enf }), fields.F)));
   }
   const hints = el('div', { class: 'hints' });
+  let active = fields.M || fields.F;
+  for (const t of Object.values(fields)) t.addEventListener('focus', () => (active = t));
+  let termsBox = renderTerms(r, () => active, box);
+  const tmBox = renderTM(r, fields);
   const save = el('button', { class: 'primary', hidden: '', text: 'Зберегти' });
   const revert = el('button', { hidden: '', text: 'Скасувати' });
   const note = el('span', { text: '' });
-  box.append(hints, el('div', { class: 'actions' }, save, revert, note));
+  box.append(hints, termsBox, tmBox, el('div', { class: 'actions' }, save, revert, note));
   renderHints(hints, r.hints);
 
   let timer = null;
@@ -332,6 +336,7 @@ function recEl(r, node) {
       }
       Object.assign(r, res.record); state.recs.set(r.num, r);
       changed(); renderHints(hints, r.hints); paintNodes(); applyFilter(); loadFiles();
+      { const nt = renderTerms(r, () => active, box); termsBox.replaceWith(nt); termsBox = nt; }
       const qa = res.qa.length ? '\nQA: ' + res.qa.join('\n') : '\nQA: чисто';
       toast(`#${r.num} збережено в uk/${state.cur.path}` + (res.notes.length ? '\n' + res.notes.join('\n') : '') + qa, res.qa.length > 0);
     } catch (e) { toast('Помилка: ' + e.message, true); }
@@ -600,3 +605,128 @@ $('#imp-apply').addEventListener('click', async () => {
     if (state.cur && r.files.includes(state.cur.path)) { state.dirty.clear(); const s = state.sel; await openFile(state.cur.path, s ?? undefined); }
   } catch (e) { toast(e.message, true); }
 });
+
+
+/* ---------- glossary terms, translation memory, glossary editor ---------- */
+
+function insertAt(t, text) {
+  if (!t || t.disabled) return;
+  const a = t.selectionStart ?? t.value.length, b = t.selectionEnd ?? a;
+  t.value = t.value.slice(0, a) + text + t.value.slice(b);
+  t.focus(); t.selectionStart = t.selectionEnd = a + text.length;
+  t.dispatchEvent(new Event('input'));
+}
+
+function renderTerms(r, getActive, box) {
+  const wrap = el('div', { class: 'terms' });
+  const terms = r.terms || [];
+  if (terms.length) wrap.append(el('span', { class: 'lab', text: 'глосарій:' }));
+  for (const t of terms) {
+    const form = t.uk.split(' / ')[0];
+    const b = el('button', { class: 'term ' + (t.ok ? 'ok' : 'miss'), type: 'button',
+      title: (t.ok ? '' : 'у перекладі нема цієї форми · ') + (t.note || '') + '\nклік — вставити «' + form + '» у поле',
+      text: `${t.en} → ${t.uk}` });
+    b.addEventListener('click', e => { e.stopPropagation(); insertAt(getActive(), form); });
+    wrap.append(b);
+  }
+  const add = el('button', { class: 'link-btn', type: 'button', title: 'Виділи слово в оригіналі (і, за бажання, в перекладі) — і натисни', text: '+ термін' });
+  add.addEventListener('mousedown', e => e.preventDefault());  // keep the selection
+  add.addEventListener('click', e => {
+    e.stopPropagation();
+    const sel = String(window.getSelection() || '').trim();
+    const t = getActive();
+    const ukSel = t && t.selectionEnd > t.selectionStart ? t.value.slice(t.selectionStart, t.selectionEnd).trim() : '';
+    const inEn = sel && box.querySelector('.en') && [...box.querySelectorAll('.en')].some(x => x.textContent.includes(sel));
+    openGlossary({ add: { en: inEn ? sel : '', uk: ukSel, note: '' } });
+  });
+  wrap.append(add);
+  return wrap;
+}
+
+function renderTM(r, fields) {
+  const wrap = el('div', { class: 'tm' });
+  for (const [f, tm] of Object.entries(r.tm || {})) {
+    if (!tm) continue;
+    const lab = Object.keys(fields).length > 1 ? `${f}: ` : '';
+    if (!tm.other.length) {
+      wrap.append(el('span', { class: 'lab', title: 'пам\'ять перекладів', text: `${lab}так само перекладено ще ${tm.same}×` }));
+      continue;
+    }
+    wrap.append(el('span', { class: 'lab', title: 'та сама англійська репліка в інших місцях', text: `${lab}ПП${tm.same ? ` (так само ${tm.same}×)` : ''}, інакше:` }));
+    for (const v of tm.other) {
+      const take = el('button', { type: 'button', title: 'взяти цей варіант у поле', text: 'взяти' });
+      take.addEventListener('click', e => {
+        e.stopPropagation(); const t = fields[f] || fields.M;
+        if (t && !t.disabled) { t.value = v.uk; t.dispatchEvent(new Event('input')); t.focus(); }
+      });
+      const where = el('a', { class: 'jump', title: v.at.join('\n'), text: `${v.n}×` });
+      where.addEventListener('click', e => { e.stopPropagation(); const [p, n] = v.at[0].split('#'); openFile(p, +n); });
+      wrap.append(el('span', { class: 'var' }, el('span', { text: '«' + v.uk + '»' }), where, take));
+    }
+  }
+  return wrap;
+}
+
+const gl = $('#gl');
+let glTimer = null;
+
+async function openGlossary({ q = '', add = null } = {}) {
+  if (!gl.open) gl.showModal();
+  if (q !== null) $('#gl-q').value = q || (add && add.en) || '';
+  await loadGlossary();
+  if (add) glForm(add);
+}
+async function loadGlossary(highlight) {
+  const r = await api('/api/glossary?q=' + encodeURIComponent($('#gl-q').value.trim()));
+  $('#gl-info').textContent = r.total > r.rows.length ? `${r.rows.length} з ${r.total}` : `${r.total}`;
+  const list = $('#gl-list'); list.textContent = '';
+  for (const g of r.rows) {
+    const row = el('div', { class: 'gl-row' + (highlight && g.en === highlight ? ' hl' : '') },
+      el('span', { text: g.en }), el('strong', { text: g.uk }), el('span', { class: 'n', text: g.note }));
+    const ed = el('button', { type: 'button', text: '✎' });
+    ed.addEventListener('click', () => glForm(g, row));
+    row.append(ed); list.append(row);
+  }
+}
+function glForm(g, row) {
+  // g with .i = edit an existing row; without = add
+  document.querySelectorAll('.gl-form').forEach(f => f.remove());
+  const f = el('form', { class: 'gl-form' });
+  const inp = (n, ph) => { const i = el('input', { name: n, placeholder: ph }); i.value = g[n] || ''; return i; };
+  f.append(inp('en', 'EN (як в оригіналі)'), inp('uk', 'UK форма (варіанти через « / »)'), inp('note', 'коментар: відмінки, ?, рішення'));
+  f.append(el('button', { class: 'primary', text: g.i != null ? 'Зберегти' : 'Додати' }));
+  const right = el('span', {});
+  if (g.i != null) {
+    const del = el('button', { type: 'button', text: 'Видалити' });
+    del.addEventListener('click', async () => {
+      if (!confirm(`Видалити з глосарія «${g.en} → ${g.uk}»?`)) return;
+      glSave({ action: 'delete', i: g.i, expect: g }, f);
+    });
+    right.append(del);
+  }
+  right.append(el('button', { type: 'button', text: '✕', onclick: () => f.remove() }));
+  f.append(right);
+  f.addEventListener('submit', e => {
+    e.preventDefault();
+    const body = { action: g.i != null ? 'update' : 'add', en: f.elements.en.value, uk: f.elements.uk.value, note: f.elements.note.value };
+    if (g.i != null) Object.assign(body, { i: g.i, expect: { en: g.en, uk: g.uk, note: g.note } });
+    glSave(body, f);
+  });
+  if (row) row.after(f); else $('#gl-form-slot').append(f);
+  (f.elements.en.value ? f.elements.uk : f.elements.en).focus();
+}
+async function glSave(body, form) {
+  try {
+    const r = await api('/api/glossary', body);
+    if (!r.ok) return toast(r.errors.join('\n'), true);
+    form.remove();
+    toast(body.action === 'delete' ? 'Рядок видалено з glossary/glossary.tsv' : 'Глосарій збережено (glossary/glossary.tsv)');
+    await loadGlossary(body.en);
+    if (state.cur && !state.dirty.size) { const s = state.sel; await openFile(state.cur.path, s ?? undefined); }
+    else if (state.cur) toast('Глосарій збережено. Підказки в картках оновляться після збереження правок або перезавантаження діалогу.');
+  } catch (e) { toast(e.message, true); }
+}
+$('#gl-open').addEventListener('click', () => openGlossary({ q: $('#gl-q').value }));
+$('#gl-close').addEventListener('click', () => gl.close());
+$('#gl-add').addEventListener('click', () => glForm({ en: '', uk: '', note: '' }));
+$('#gl-q').addEventListener('input', () => { clearTimeout(glTimer); glTimer = setTimeout(() => loadGlossary(), 200); });
