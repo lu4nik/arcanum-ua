@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Редактор діалогів</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <strong>Arcanum UA · діалоги</strong>
+  <form id="search-form">
+    <input id="search" type="search" placeholder="Пошук: текст EN/UK, 01687, 01687#14, #14 у поточному" autocomplete="off">
+  </form>
+  <span id="file-title"></span>
+  <label class="toggle"><input type="checkbox" id="only-problems"> лише проблемні</label>
+  <label class="toggle"><input type="checkbox" id="show-graph" checked> граф</label>
+  <button id="ai-open" title="Контекстний пакет для іншого ШІ та імпорт його відповіді">ШІ-пакет</button>
+</header>
+<main>
+  <aside id="sidebar">
+    <input id="file-filter" type="search" placeholder="Фільтр: назва, номер, текст привітання" autocomplete="off">
+    <div id="kinds" class="chips"></div>
+    <div class="list-tools">
+      <select id="f-status" title="Статус у status.tsv">
+        <option value="">усі статуси</option><option>todo</option><option>in_progress</option>
+        <option>translated</option><option>reviewed</option><option>edited</option>
+      </select>
+      <select id="f-sort" title="Сортування">
+        <option value="num">за номером</option><option value="problems">спершу проблемні</option>
+        <option value="words">за обсягом</option>
+      </select>
+      <label title="Лише файли з помилками або попередженнями"><input type="checkbox" id="f-bad"> з проблемами</label>
+    </div>
+    <div id="list-info" class="muted"></div>
+    <div id="results" hidden></div>
+    <ul id="files"></ul>
+  </aside>
+  <section id="graph-pane">
+    <div class="graph-tools">
+      <button id="zoom-out" title="Зменшити">−</button>
+      <button id="zoom-in" title="Збільшити">+</button>
+      <span class="legend"><i class="lg npc"></i>NPC <i class="lg go"></i>відповідь <i class="lg back"></i>назад <i class="lg fl"></i>fl (плаваючий текст, кінець)</span>
+    </div>
+    <div id="graph-scroll"><svg id="graph" xmlns="http://www.w3.org/2000/svg"></svg></div>
+  </section>
+  <section id="cards"><p class="empty">Обери діалог ліворуч або знайди за номером (наприклад <code>01687</code>).</p></section>
+</main>
+<dialog id="ai">
+  <div class="ai-head">
+    <button class="tab active" data-tab="export">Експорт пакета</button>
+    <button class="tab" data-tab="import">Імпорт відповіді</button>
+    <span class="grow"></span>
+    <button id="ai-close" title="Закрити (Esc)">✕</button>
+  </div>
+  <section class="ai-tab" data-tab="export">
+    <div class="row">
+      <label><input type="radio" name="scope" value="node" checked> <span id="scope-node">поточний вузол</span></label>
+      <label><input type="radio" name="scope" value="problems"> проблемні записи</label>
+      <label><input type="radio" name="scope" value="all"> весь діалог</label>
+      <button id="pack-make" class="primary">Згенерувати</button>
+      <button id="pack-copy" disabled>Копіювати</button>
+      <span id="pack-info" class="muted"></span>
+    </div>
+    <textarea id="pack-text" readonly placeholder="Тут з'явиться пакет: завдання, формат відповіді, обмеження, глосарій, контекст, записи, стайлгайд."></textarea>
+  </section>
+  <section class="ai-tab" data-tab="import" hidden>
+    <div class="row">
+      <span class="muted">Встав відповідь агента (формат sheet.py: <code>@ dlg/…</code>, <code>#14 M: …</code>). Нічого не запишеться без «Прийняти».</span>
+    </div>
+    <textarea id="imp-text" placeholder="@ dlg/01687virgil_in_shrouded_hills_inn.dlg&#10;#4: …"></textarea>
+    <div class="row">
+      <button id="imp-preview" class="primary">Показати diff</button>
+      <button id="imp-apply" disabled>Прийняти вибране</button>
+      <button id="imp-clear">Відхилити все</button>
+      <label class="muted"><input type="checkbox" id="imp-all"> вибрати всі</label>
+      <span id="imp-info" class="muted"></span>
+    </div>
+    <div id="imp-list"></div>
+  </section>
+</dialog>
+<div id="toast" hidden></div>
+<script src="app.js"></script>
+</body>
+</html>
