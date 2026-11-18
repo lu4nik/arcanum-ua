@@ -61,8 +61,12 @@ class Font:
     def __init__(self, art):
         self.art = art
         self.pal = next(p for p in art.palettes if p)
-        # grey ramp: palette index -> luminance; indices 2..16 are the greys
-        self.ramp = sorted(((self.pal[i] >> 16) & 255, i) for i in range(2, 17))
+        # grey ramp: the non-black grey palette indices the original glyphs use
+        used = set()
+        for fr in art.frames:
+            used.update(fr['pixels'])
+        grey = lambda v: ((v >> 16) & 255) == ((v >> 8) & 255) == (v & 255) and v & 255
+        self.ramp = sorted(((self.pal[i] >> 16) & 255, i) for i in used if i > 1 and grey(self.pal[i]))
 
     def glyph(self, byte):
         fr = self.art.frames[byte - 31]
@@ -448,6 +452,7 @@ def preview(art, f, path, S=3):
              'Нова гра  Завантажити  Налаштування',
              'Вихід  Продовжити  Зберегти гру  Ще',
              'Щасливої дороги, Їжаче! Ґанок, Юрко, Ємність',
+             'ЖУРНАЛ  ЧУТКИ  ЗАВДАННЯ  ЛЮДИ  БЮЛЕТЕНЬ  ФІЗИКА  ЦЕХ  ЩЕДРІСТЬ  ЇЖА  ҐРУНТ  ЄВА  ЙОД  ЯР',
              'New Game  Load Game  Options']
     pal = f.pal
     rows = []

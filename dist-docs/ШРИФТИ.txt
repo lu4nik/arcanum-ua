@@ -9,6 +9,10 @@
   спільні форми скопійовано, інші віддзеркалено, вирізано чи складено,
   бракуючі штрихи домальовано.
 
+* zurich16 (вкладки журналу, рубрики газети): латинські літери й спільні
+  форми — оригінальні з гри, решту кирилиці намальовано попіксельно в тому ж
+  стилі (tools/zurichcyr.py).
+
 Решту шрифтів перемальовано рендером із вільних гарнітур:
 
 Використані гарнітури:
@@ -20,7 +24,7 @@
 * PT Serif, PT Serif Caption, PT Sans, PT Sans Narrow, PT Mono — ParaType, ParaType Free Font License
   https://www.paratype.com/fonts/pt/pt-serif
   діалоги (flare12/flare14), книжки (casablanca16), газета (garmond, swiss921),
-  жирний і вузький шрифти інтерфейсу, телеграми (clarendonblk18, courier10)
+  жирний і вузький шрифти інтерфейсу (крім zurich16), телеграми (clarendonblk18, courier10)
 
 * Old Standard TT — Copyright 2011 The Old Standard Project Authors,
   SIL Open Font License 1.1
