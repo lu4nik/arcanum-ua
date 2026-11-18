@@ -2,24 +2,25 @@
 =================================
 
 Файли *font.art — бітмапні шрифти гри, у яких кадри кирилиці (cp1251)
-перемальовано рендером із вільних шрифтів. Латинські кадри — оригінальні,
-з гри.
+перемальовано. Латинські кадри — оригінальні, з гри.
+
+* Morpheus (morph30 — меню, morph15 — назви предметів, заклять, заголовки):
+  кирилицю зібрано з оригінальних латинських літер гри (tools/morphcyr.py):
+  спільні форми скопійовано, інші віддзеркалено, вирізано чи складено,
+  бракуючі штрихи домальовано.
+
+Решту шрифтів перемальовано рендером із вільних гарнітур:
 
 Використані гарнітури:
 
 * Forum — Denis Masharov, SIL Open Font License 1.1
   https://fonts.google.com/specimen/Forum
-  меню, назви газет і частина шрифтів інтерфейсу
+  назви газет і частина шрифтів інтерфейсу
 
 * PT Serif, PT Serif Caption, PT Sans, PT Sans Narrow, PT Mono — ParaType, ParaType Free Font License
   https://www.paratype.com/fonts/pt/pt-serif
   діалоги (flare12/flare14), книжки (casablanca16), газета (garmond, swiss921),
   жирний і вузький шрифти інтерфейсу, телеграми (clarendonblk18, courier10)
-
-* Cormorant Unicase — Copyright 2015 the Cormorant Project Authors,
-  SIL Open Font License 1.1
-  https://fonts.google.com/specimen/Cormorant+Unicase
-  назви предметів (morph15)
 
 * Old Standard TT — Copyright 2011 The Old Standard Project Authors,
   SIL Open Font License 1.1
