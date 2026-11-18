@@ -229,7 +229,7 @@ def build(f):
         src = lambda a, b: L(a if up else b)
         o = {}
         for cy, (a, b) in {'А': 'Aa', 'В': 'Bb', 'Е': 'Ee', 'К': 'Kk', 'М': 'Mm', 'Н': 'Hh',
-                           'О': 'Oo', 'Р': 'Pp', 'С': 'Cc', 'Х': 'Xx', 'У': 'Yy', 'І': 'Ii'}.items():
+                           'О': 'Oo', 'Р': 'Pp', 'С': 'Cc', 'Х': 'Xx', 'І': 'Ii'}.items():
             o[cy] = src(a, b).tight()
         # К is far more frequent in Ukrainian than K in English: clip the long
         # tail so it stops just past the advance instead of running under the next letter
@@ -377,10 +377,81 @@ def build(f):
         o['Ж'] = over((Km, 0, 0), (Kg, kms[0] - ks[0], 0))
         o['Ж'].adv = kms[0] - ks[0] + Kg.adv
 
-        # Ф: O + vertical stem through it
+        # У: from X keep the long diagonal (top-right -> bottom-left) and the upper
+        # half of the other one (Morpheus Y reads as Ү)
+        X = o['Х']
+        xd = X.im.load()
+        xw = X.im.width
+        y1, y2 = top + r(4), BASE - r(4)
+
+        def centres(y):
+            runs, cur = [], None
+            for x in range(xw):
+                if xd[x, y] > 100:
+                    if cur and x == cur[1] + 1:
+                        cur[1] = x
+                    else:
+                        cur = [x, x]; runs.append(cur)
+            return [(r_[0] + r_[1]) / 2 for r_ in runs]
+        c1, c2 = centres(y1), centres(y2)
+        (al, ar), (bl, br) = (c1[0], c1[-1]), (c2[0], c2[-1])
+
+        def dist(px, py, x0, y0, x1, y1_):
+            dx, dy = x1 - x0, y1_ - y0
+            return abs(dy * (px - x0) - dx * (py - y0)) / (dx * dx + dy * dy) ** 0.5
+        cy = (top + BASE) / 2
+        tol = sw * 0.8 + 1
+        uy = X.copy()
+        ud = uy.im.load()
+        for yy in range(H):
+            for xx in range(xw):
+                if not ud[xx, yy]:
+                    continue
+                if yy < y1:
+                    continue                       # top serifs stay
+                onb = dist(xx, yy, ar, y1, bl, y2) <= tol
+                ona = dist(xx, yy, al, y1, br, y2) <= tol and yy <= cy
+                if yy > y2:
+                    onb = xx < xw / 2              # only the bottom-left foot
+                if not (onb or ona):
+                    ud[xx, yy] = 0
+        # the Morpheus X has a small loop at the crossing: clear a band there and run
+        # the long diagonal straight through it
+        bx = lambda yy: ar + (bl - ar) * (yy - y1) / (y2 - y1)
+        ya, yb = int(cy - u(2.5)), int(cy + u(2.5)) + 1
+        uy = erase(uy, 0, ya, xw, yb)
+        uy = draw(uy, line(bx(ya - 1.5) + 0.5, ya - 1.5, bx(yb + 1.5) + 0.5, yb + 1.5, lw))
+        # left arm: from its top serif down to the diagonal
+        uy = draw(uy, line(al + 0.5, y1 - 1, bx(ya) + 0.5, ya, max(lw * 0.75, 1.1)))
+        o['У'] = uy.tight()
+        o['У'].adv = X.adv
+
+        # Ф: O without its centre dot, split in half, a long stem between the halves
         O = o['О']
-        cxo = O.im.width / 2
-        o['Ф'] = draw(O, rect(cxo - sw / 2, top - u(2), cxo + sw / 2 - 1, BASE + u(2))).tight()
+        ow = O.im.width
+        Oh = O.copy()
+        od = Oh.im.load()
+        for y in range(top, BASE + 1):
+            runs, cur = [], None
+            for x in range(ow):
+                if od[x, y] > 100:
+                    if cur and x == cur[1] + 1:
+                        cur[1] = x
+                    else:
+                        cur = [x, x]; runs.append(cur)
+            if len(runs) >= 2:
+                for x in range(runs[0][1] + 1, runs[-1][0]):
+                    od[x, y] = 0
+        half = ow // 2
+        gap = sw + r(1)
+        # small sizes: drop an empty inner column of the right half to keep names
+        # within their rects (the left one is needed to keep the stem off the ring)
+        cut = 0 if K >= 1 else 1
+        lh = keep(Oh, 0, 0, half - 1, H - 1)
+        rh = keep(Oh, half + cut, 0, ow - 1, H - 1)
+        fo = over((lh, 0, 0), (shift(rh, gap - cut, 0), 0, 0))
+        sx = half + (gap - sw) / 2 - 0.5
+        o['Ф'] = draw(fo, rect(sx, top - u(3), sx + sw - 1, BASE + u(3))).tight()
 
         # Ь: P with the bowl moved to the bottom; Б, Ъ, Ы from it
         P = o['Р']
