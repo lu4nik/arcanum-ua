@@ -154,16 +154,68 @@ def college(n):
     return mes('mes/spell.mes').get(500 + n, 'школа %d' % n)
 
 
+_flags_uk = None
+
+
+def _uk_notes():
+    """docs/flags-uk.tsv: our Ukrainian rendering of the developer notes."""
+    global _flags_uk
+    if _flags_uk is None:
+        _flags_uk = {}
+        p = os.path.join(ROOT, 'docs', 'flags-uk.tsv')
+        if os.path.exists(p):
+            for line in open(p, encoding='utf-8'):
+                c = line.rstrip('\n').split('\t')
+                if len(c) >= 3 and c[1].isdigit():
+                    _flags_uk[(c[0], int(c[1]))] = c[2]
+    return _flags_uk
+
+
+def _note(table, n):
+    return _uk_notes().get((table, n)) or mes('semes/%s.mes' % table, 'source').get(n, '')
+
+
 def gflag(n):
-    return mes('semes/globalflags.mes', 'source').get(n, '')
+    return _note('globalflags', n)
 
 
 def gvar(n):
-    return mes('semes/globalvars.mes', 'source').get(n, '')
+    return _note('globalvars', n)
 
 
 def pcvar(n):
-    return mes('semes/pcvars.mes', 'source').get(n, '')
+    return _note('pcvars', n)
+
+
+AUTHOR = re.compile(r'^\s*[A-Za-z]+\s*[-:]\s*(?=\S)')
+
+
+def meaning(note, value):
+    """The part of a 'N = text, M = text' note that matches value.
+    -> (text, negated): negated when only the 1-meaning is known and value is 0."""
+    note = AUTHOR.sub('', ' '.join(note.split()))
+    parts = re.split(r'(?:^|[;,.]\s*|\s)(-?\d+)\s*=\s*', note)
+    m = {}
+    for i in range(1, len(parts) - 1, 2):
+        m[int(parts[i])] = parts[i + 1].strip(' ,;.')
+    if value in m:
+        if value != 1 and 1 in m and len(m[value].split()) <= 2:
+            return '%s (%s)' % (m[1], m[value]), True  # «0 = вимкнено»: say what is off
+        return m[value], False
+    if value == 0 and 1 in m:
+        return m[1], True
+    return note.strip(' ,;.'), False
+
+
+def flag_text(kind, label, n, v, note, act):
+    """Readable chip: the meaning itself, the number goes to the tooltip."""
+    if not note:
+        return ('⚑ %s %d %s %d (без опису)' % (label, n, ':=' if act else '=', v)), 'розробники не залишили коментаря'
+    txt, neg = meaning(note, v)
+    txt = short(txt, 80)
+    if act:
+        return ('⚑ ' + ('тепер НЕ: ' if neg else 'тепер: ') + txt), '%s %d := %d · %s' % (label, n, v, note)
+    return ('⚑ ' + ('НЕ: ' if neg else '') + txt), '%s %d = %d · %s' % (label, n, v, note)
 
 
 def story(n):
@@ -193,10 +245,10 @@ def _cond(c, a, b, sign):
         return ('у NPC є предмет %s' % q(item(-a)) if a < 0 else 'у ГГ або загону є предмет %s' % q(item(a))), 'предмет %d' % abs(a)
     if c == 'ni':
         return ('у NPC немає предмета %s' % q(item(-a)) if a < 0 else 'у ГГ і загону немає предмета %s' % q(item(a))), 'предмет %d' % abs(a)
-    if c == 'gf': return 'глобальний прапорець %d = %d' % (a, b), gflag(a)
-    if c == 'gv': return 'глобальна змінна %d = %d' % (a, b), gvar(a)
-    if c == 'pf': return 'прапорець ГГ %d = %d' % (a, b), pcvar(a)
-    if c == 'pv': return 'змінна ГГ %d = %d' % (a, b), pcvar(a)
+    if c == 'gf': return flag_text(c, 'глобальний прапорець', a, b, gflag(a), False)
+    if c == 'gv': return flag_text(c, 'глобальна змінна', a, b, gvar(a), False)
+    if c == 'pf': return flag_text(c, 'прапорець ГГ', a, b, pcvar(a), False)
+    if c == 'pv': return flag_text(c, 'змінна ГГ', a, b, pcvar(a), False)
     if c == 'lf': return 'прапорець цього NPC %d = %d' % (a, b), 'локальний прапорець діалогового скрипта; ставиться ефектом lf'
     if c == 'lc': return 'лічильник цього NPC %d = %d' % (a, b), 'локальний лічильник діалогового скрипта; ставиться ефектом lc'
     st = QUEST_STATES[b] if 0 <= b < len(QUEST_STATES) else str(b)
@@ -239,10 +291,10 @@ def _act(c, a, b, sign):
     if c == 'qu': return 'квест %d → %s' % (a, st), quest(a)
     if c == 'fl': return 'NPC каже рядок #%d над головою, розмова закінчується' % a, ''
     if c == 'co': return 'NPC нападає на ГГ', ''
-    if c == 'gf': return 'глобальний прапорець %d := %d' % (a, b), gflag(a)
-    if c == 'gv': return 'глобальна змінна %d := %d' % (a, b), gvar(a)
-    if c == 'pf': return 'прапорець ГГ %d := %d' % (a, b), pcvar(a)
-    if c == 'pv': return 'змінна ГГ %d := %d' % (a, b), pcvar(a)
+    if c == 'gf': return flag_text(c, 'глобальний прапорець', a, b, gflag(a), True)
+    if c == 'gv': return flag_text(c, 'глобальна змінна', a, b, gvar(a), True)
+    if c == 'pf': return flag_text(c, 'прапорець ГГ', a, b, pcvar(a), True)
+    if c == 'pv': return flag_text(c, 'змінна ГГ', a, b, pcvar(a), True)
     if c == 'lf': return 'прапорець цього NPC %d := %d' % (a, b), 'перевіряється умовою lf'
     if c == 'lc': return 'лічильник цього NPC %d := %d' % (a, b), 'перевіряється умовою lc'
     if c == 'mm': return 'на мапі з’являється місце %s' % q(area(a)), 'місце %d' % a
