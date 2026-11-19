@@ -117,6 +117,83 @@ RULES = [
 ]
 
 
+def _orig(src):
+    return src.encode('cp1252', 'replace').decode('cp1251', 'replace')
+
+
+def entry_issue(rule, k, src, v):
+    """One rule on one entry -> None, 'vanilla' (the original overflows too) or
+    (sort_key, message). Shared by check_rules and the editor's live hints."""
+    label, rel, pred, fname, width, maxl = rule
+    if not v.strip() or not pred(k):
+        return None
+    fnt = font(fname)
+    # one-line rules apply to NAMES only: descriptions share key ranges
+    is_name = not (len(src) > 48 or src.rstrip().endswith('.') or '\n' in src)
+    if maxl == -1:
+        maxl_e = 1  # every entry, name or not
+    elif (maxl == 1) != is_name:
+        return None
+    else:
+        maxl_e = maxl
+    if maxl == 0:
+        # description: the panel is 2, 3 or 5 lines tall, sized for the original
+        need = len(layout(fnt, _orig(src), width))
+        allowed = next((n for n in (2, 3, 5) if n >= need), need)
+        got = len(layout(fnt, v, width))
+        if got > allowed:
+            return (got * 100 + allowed, f'[{got} рядків, місця на {allowed}] ')
+        return None
+    lines = layout(fnt, v, width)
+    if len(lines) > maxl_e or -1 in lines:
+        # the original overflowing too means vanilla behaves the same: not our bug
+        el = layout(fnt, _orig(src), width) if src else []
+        if src and (len(el) > maxl_e or -1 in el):
+            return 'vanilla'
+        w = one_line_width(fnt, v)
+        return (w, f'{w} px > {width} px ')
+    return None
+
+
+def fit_hints(rel, k, src, v):
+    """Live hints for one .mes entry: every rule that covers it."""
+    out = []
+    for rule in RULES:
+        if rule[1] != rel:
+            continue
+        r = entry_issue(rule, k, src, v)
+        if r is None:
+            continue
+        if r == 'vanilla':
+            out.append({'sev': 'info', 'msg': f'{rule[0]}: не влазить, але й оригінал не влазить'})
+        else:
+            out.append({'sev': 'err', 'msg': f'{rule[0]}: {r[1].strip()} — у грі не покажеться або обріжеться'})
+    return out
+
+
+def places(rel, k, src):
+    """Where an entry is drawn: [(label, font, width, lines)] for the rules that
+    cover it (lines = rect height in lines; 0 none, i.e. as the text needs)."""
+    out = []
+    for label, r, pred, fname, width, maxl in RULES:
+        if r != rel or not pred(k):
+            continue
+        is_name = not (len(src) > 48 or src.rstrip().endswith('.') or '\n' in src)
+        if maxl in (1, 0) and (maxl == 1) != is_name:
+            continue
+        if maxl == 0:
+            need = len(layout(font(fname), _orig(src), width)) if src else 1
+            n = next((x for x in (2, 3, 5) if x >= need), need)
+        else:
+            n = 1
+        out.append((label, fname, width, n))
+    return out
+
+
+def rules_for(rel):
+    return [r[0] for r in RULES if r[1] == rel]
+
+
 def check_rules():
     total = 0
     for label, rel, pred, fname, width, maxl in RULES:
@@ -132,33 +209,11 @@ def check_rules():
         for e in arcfmt.parse_mes(open(p, 'rb').read()):
             k = e['key'].decode('latin1').strip()
             v = e['value'].decode('utf-8', 'replace')
-            if not v.strip() or not pred(k):
-                continue
-            # one-line rules apply to NAMES only: descriptions share key ranges
-            src = en.get(e['key'].strip(), '')
-            is_name = not (len(src) > 48 or src.rstrip().endswith('.') or '\n' in src)
-            if maxl == -1:
-                maxl_e = 1  # every entry, name or not
-            elif (maxl == 1) != is_name:
-                continue
-            else:
-                maxl_e = maxl
-            if maxl == 0:
-                # description: the panel is 2, 3 or 5 lines tall, sized for the original
-                need = len(layout(fnt, src.encode('cp1252', 'replace').decode('cp1251', 'replace'), width))
-                allowed = next((n for n in (2, 3, 5) if n >= need), need)
-                got = len(layout(fnt, v, width))
-                if got > allowed:
-                    bad.append((got * 100 + allowed, k, f'[{got} рядків, місця на {allowed}] ' + v))
-                continue
-            lines = layout(fnt, v, width)
-            if len(lines) > maxl_e or -1 in lines:
-                # the original overflowing too means vanilla behaves the same: not our bug
-                el = layout(fnt, src.encode('cp1252', 'replace').decode('cp1251', 'replace'), width) if src else []
-                if src and (len(el) > maxl_e or -1 in el):
-                    vanilla += 1
-                    continue
-                bad.append((one_line_width(fnt, v), k, v))
+            r = entry_issue((label, rel, pred, fname, width, maxl), k, en.get(e['key'].strip(), ''), v)
+            if r == 'vanilla':
+                vanilla += 1
+            elif r:
+                bad.append((r[0], k, (r[1] if maxl == 0 else '') + v))
         print(f'== {label}: {rel} — не влазить {len(bad)} (ще {vanilla} не влазять і в оригіналі)')
         for w, k, v in sorted(bad, reverse=True):
             print(f'   {w:4d}px {{{k}}} {v[:70]}')

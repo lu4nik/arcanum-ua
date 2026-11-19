@@ -100,6 +100,8 @@ function renderFiles() {
 /* ---------- grouping by speaker ---------- */
 
 const numOf = path => +((path.match(/dlg\/(\d+)/) || [])[1] || 0);
+// first word of «хто» that names a thing (an object the player uses or examines)
+const THING = /^(вітрин|вівтар|двер|кам['’]?ян|ліжк|надгроб|сейф|табличк|щоденник|калюж|люк|магічн(ий портал|і захисні)|могил|підставк|прадавн|пристр|скляний ключ|системн|службов|таємн|закривавлен|записк|камін|паспорт|амулет|книг|напис|штурвал|експонат|статуя|скриня|скриньк)/i;
 const groupOpen = new Map();  // key -> true/false once the user toggled it
 // Person part of «хто»: before the first comma, without «?» — «Вірджил, супутник» → «Вірджил».
 function personOf(x) {
@@ -117,8 +119,12 @@ function groupFiles(rows) {
     if (!groups.has(k)) groups.set(k, { key: k, files: [], name: p || 'без персонажа' });
     groups.get(k).files.push(x);
   }
-  for (const G of groups.values()) G.pic = G.files.find(x => x.spk && x.spk.own) || G.files.find(x => x.spk);
-  return [...groups.values()].sort((a, b) => (a.key === '—') - (b.key === '—') || b.files.length - a.files.length || a.name.localeCompare(b.name, 'uk'));
+  for (const G of groups.values()) {
+    G.pic = G.files.find(x => x.spk && x.spk.own) || G.files.find(x => x.spk);
+    // a thing, not a person: only «огляд» dialogues and nobody in the game speaks them
+    G.sec = G.key === '—' ? 2 : (!G.pic && (G.files.every(x => x.kind === 'examine') || THING.test(G.name))) ? 1 : 0;
+  }
+  return [...groups.values()].sort((a, b) => a.sec - b.sec || b.files.length - a.files.length || a.name.localeCompare(b.name, 'uk'));
 }
 function picImg(x, cls) {
   const img = el('img', { class: cls, alt: '', loading: 'lazy', src: '/api/pic?num=' + numOf(x.path) });
@@ -127,7 +133,15 @@ function picImg(x, cls) {
 }
 function renderGroups(rows, frag) {
   const curGroup = state.cur && state.cur.path;
-  for (const G of groupFiles(rows)) {
+  const SEC = ['Персонажі', 'Предмети й об\u2019єкти', 'Без персонажа'];
+  let sec = -1;
+  const all = groupFiles(rows);
+  for (const G of all) {
+    if (G.sec !== sec) {
+      sec = G.sec;
+      const n = all.filter(g => g.sec === sec);
+      frag.append(el('li', { class: 'sec', text: `${SEC[sec]} · ${n.length} груп, ${n.reduce((k, g) => k + g.files.length, 0)} діал.` }));
+    }
     const open = groupOpen.has(G.key) ? groupOpen.get(G.key) : G.files.some(x => x.path === curGroup) || rows.length < 40;
     const head = el('li', { class: 'grp' + (open ? ' open' : ''), title: G.pic && G.pic.spk ? [G.pic.spk.name, ...(G.pic.spk.maps || [])].join(' · ') : '' });
     head.append(G.pic ? picImg(G.pic, 'av') : el('span', { class: 'av none' }));
@@ -235,10 +249,23 @@ function jumpLink(n, prefix = '→ ') {
   const ok = state.recs.has(n) || state.cur.graph.nodes.some(x => x.num === n);
   return el('a', { class: 'jump', title: ok ? 'перейти' : 'такого рядка нема у файлі', onclick: () => jump(n), text: prefix + n + (ok ? '' : ' (нема)') });
 }
-function effectTags(fx) {
+// Conditions / effects as readable chips; the raw code and details go to the tooltip.
+function codeTags(items, raw, kind) {
+  const head = kind === 'cond' ? 'якщо' : 'тоді';
+  const help = kind === 'cond'
+    ? 'Умова показу: репліку видно, лише коли виконано ВСІ умови.'
+    : 'Ефекти: що стається, коли гравець обирає цю репліку.';
+  const out = [el('span', { class: 'tag code-head ' + kind, title: help + '\nКод у файлі: ' + raw, text: head })];
+  for (const it of items || [{ text: raw, raw, detail: '' }]) {
+    const tip = [`${it.raw}`, it.detail].filter(Boolean).join('\n');
+    out.push(el('span', { class: 'tag code ' + kind + (it.unknown ? ' unk' : ''), title: tip, text: it.text }));
+  }
+  return out;
+}
+function effectTags(fx, r) {
   if (!fx) return [];
-  const out = [el('span', { class: 'tag', title: 'ефекти', text: fx })];
-  for (const m of fx.matchAll(/\bfl\s+(-?\d+)/gi)) out.push(jumpLink(Math.abs(+m[1]), 'fl → '));
+  const out = codeTags(r && r.fx_h, fx, 'act');
+  for (const m of fx.matchAll(/\bfl\s*(-?\d+)/gi)) out.push(jumpLink(Math.abs(+m[1]), 'fl → '));
   return out;
 }
 
@@ -307,10 +334,10 @@ function recEl(r, node) {
     meta.append(el('span', { class: 'tag', text: iq < 0 ? `ІНТ ≤ ${-iq}` : `ІНТ ≥ ${iq}` }));
     if (r.gate === '0') meta.append(el('span', { class: 'tag', text: 'лише ГГ-жінка' }));
     if (r.gate === '1') meta.append(el('span', { class: 'tag', text: 'лише ГГ-чоловік' }));
-    if (r.cond) meta.append(el('span', { class: 'tag', title: 'умова показу', text: 'якщо ' + r.cond }));
+    if (r.cond) meta.append(...codeTags(r.cond_h, r.cond, 'cond'));
     meta.append(targetTag(r));
   }
-  meta.append(...effectTags(r.effects));
+  meta.append(...effectTags(r.effects, r));
 
   const box = el('div', { class: `rec ${r.kind}`, id: 'rec-' + r.num }, meta);
   if (ENGINE.test(r.en)) {

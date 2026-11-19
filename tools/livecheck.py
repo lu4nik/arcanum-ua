@@ -133,3 +133,11 @@ def hints(kind, en, uk, enf='', ukf='', gate=''):
 if __name__ == '__main__':
     import json
     print(json.dumps(hints(sys.argv[1], sys.argv[2], sys.argv[3]), ensure_ascii=False, indent=1))
+
+
+def mes_hints(rel, key, en, uk):
+    """Hints for one .mes entry: text checks + the width rules that cover it."""
+    if not en.strip() and not uk.strip():
+        return {'issues': []}
+    issues = _text_issues(en, uk) + widthcheck.fit_hints(rel, key, en, uk)
+    return {'issues': issues}

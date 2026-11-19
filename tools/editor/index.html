@@ -8,7 +8,8 @@
 </head>
 <body>
 <header>
-  <strong>Arcanum UA · діалоги</strong>
+  <strong>Arcanum UA</strong>
+  <span id="mode" class="chips"><button data-mode="dlg" class="on">Діалоги</button><button data-mode="mes" title="Інтерфейс, назви й описи предметів, журнал, газета, загальні репліки (.mes)">Тексти</button></span>
   <form id="search-form">
     <input id="search" type="search" placeholder="Пошук: текст EN/UK, 01687, 01687#14, #14 у поточному" autocomplete="off">
   </form>
@@ -37,6 +38,7 @@
     <div id="list-info" class="muted"></div>
     <div id="results" hidden></div>
     <ul id="files"></ul>
+    <ul id="mes-files"></ul>
   </aside>
   <section id="graph-pane">
     <div class="graph-tools">
@@ -95,5 +97,6 @@
 </dialog>
 <div id="toast" hidden></div>
 <script src="app.js"></script>
+<script src="mes.js"></script>
 </body>
 </html>

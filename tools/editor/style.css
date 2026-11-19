@@ -186,3 +186,36 @@ textarea.dirty { border-color: var(--accent); }
 img.av, span.av { width: 36px; height: 36px; flex: none; object-fit: contain; image-rendering: pixelated; background: #2a2622; border-radius: 4px; }
 img.av.none, span.av.none { background: var(--line); }
 #file-pic { height: 40px; width: auto; max-width: 48px; object-fit: contain; image-rendering: pixelated; background: #2a2622; border-radius: 4px; margin-right: 6px; vertical-align: middle; }
+
+/* readable conditions / effects */
+.tag.code-head { font-weight: 600; background: transparent; border-color: transparent; padding-right: 0; }
+.tag.code { cursor: help; max-width: 520px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tag.code.cond { background: color-mix(in srgb, var(--sel) 12%, var(--panel)); }
+.tag.code.act { background: color-mix(in srgb, var(--fl) 14%, var(--panel)); }
+.tag.code.unk { opacity: .6; font-style: italic; }
+#files li.sec { padding: 10px 10px 4px; font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); font-weight: 600; border-bottom: 1px solid var(--line); }
+
+/* «Тексти» mode (.mes) */
+#mes-files { display: none; overflow: auto; flex: 1; margin: 0; padding: 0 0 20px; list-style: none; }
+body.mode-mes #mes-files { display: block; }
+body.mode-mes #files, body.mode-mes #results, body.mode-mes #kinds, body.mode-mes .list-tools,
+body.mode-mes #graph-pane, body.mode-mes #search-form, body.mode-mes #ai-open,
+body.mode-mes label.toggle:has(#only-problems), body.mode-mes label.toggle:has(#show-graph) { display: none !important; }
+#mes-files li.f { display: block; padding: 6px 10px 7px; cursor: pointer; font-size: 13px; border-left: 3px solid var(--line); border-bottom: 1px solid color-mix(in srgb, var(--line) 50%, transparent); }
+#mes-files li.f:hover, #mes-files li.f.active { background: var(--bg); }
+#mes-files li.f.active { border-left-color: var(--accent); }
+#mes-files li.sec { padding: 10px 10px 4px; font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); font-weight: 600; border-bottom: 1px solid var(--line); }
+#mes-files .l1 { display: flex; justify-content: space-between; gap: 6px; }
+#mes-files .l1 .no { color: var(--muted); font-size: 11px; }
+#mes-files .l3 { display: flex; gap: 8px; font-size: 11px; color: var(--muted); margin-top: 2px; }
+.mes-tools { display: flex; gap: 10px; align-items: center; margin-top: 8px; }
+.mes-tools input[type=search] { flex: 1; max-width: 420px; }
+#mode button.on { background: var(--accent); color: var(--panel); border-color: var(--accent); }
+.badge.info { background: var(--info-bg); color: var(--info); border-radius: 4px; padding: 0 4px; }
+.tag.where { background: transparent; border-style: dashed; }
+.pv-btn { font-size: 11px; padding: 0 8px; margin-left: auto; }
+.pv-btn.on { background: var(--accent); color: var(--panel); border-color: var(--accent); }
+.pv { display: flex; flex-wrap: wrap; gap: 10px; margin: 8px 0 2px; }
+.pv figure { margin: 0; }
+.pv img { display: block; image-rendering: pixelated; max-width: 100%; border-radius: 3px; }
+.pv figcaption { font-size: 11px; color: var(--muted); margin-top: 2px; }

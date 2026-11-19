@@ -17,8 +17,8 @@ from urllib.parse import urlparse, parse_qs
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, 'tools'))
-import aipack, arcfmt, dlggraph, glosscheck, livecheck, qa, sheet
-import npcart
+import aipack, arcfmt, dlggraph, glosscheck, livecheck, qa, sheet, widthcheck
+import npcart, dlgcodes, textpreview
 
 STATIC = os.path.join(ROOT, 'tools', 'editor')
 LOCK = threading.Lock()
@@ -65,6 +65,10 @@ def record_view(s, u):
     else:
         r['gate'] = _d(s['female'], 'latin1').strip()
     r['blank'] = not (r['en'].strip() or r.get('enf', '').strip())
+    if r.get('cond'):
+        r['cond_h'] = dlgcodes.explain(r['cond'], 'cond')
+    if r['effects']:
+        r['fx_h'] = dlgcodes.explain(r['effects'], 'act')
     if not r['blank']:
         r['hints'] = livecheck.hints('npc' if kind == 'npc' else 'pc', r['en'], r['uk'],
                                      r.get('enf', ''), r.get('ukf', ''), r.get('gate', ''))
@@ -426,6 +430,131 @@ def api_search(q):
     return {'files': named, 'hits': hits}
 
 
+# ---------------------------------------------------------------- .mes texts
+
+MES_GROUPS = [
+    ('Інтерфейс', ['mainmenu', 'intgame', 'charedit', 'stat', 'skill_ui', 'inven_ui', 'logbk_ui', 'combat',
+                   'fate_ui', 'follower_ui', 'sleepui', 'text_filter_sleep', 'worldmap', 'options_ui',
+                   'optionscombatmode', 'optionsdifficulty', 'optionsfloats', 'optionsoffon', 'optionswalk',
+                   'multiplayer', 'level', 'item', 'reaction', 'trap', 'critter', 'language', 'urls']),
+    ('Предмети, закляття, навички', ['description', 'gamedesc', 'item_effect', 'gameitemeffect', 'gamekey',
+                                     'gamebless', 'gamecurse', 'gameback', 'spell', 'skill', 'tech',
+                                     'schematic_text']),
+    ('Журнал, газета, книжки', ['gamequestlog', 'gamequestlogdumb', 'gamereplog', 'storystate', 'gamearea',
+                                'gamenewspaper', 'gamebook', 'gamenote', 'gameplaque', 'gametelegram',
+                                'gamelevelname', 'userlevelname', 'quotes']),
+]
+MES_TITLE = {
+    'mainmenu': 'головне меню', 'intgame': 'ігровий інтерфейс, підказки', 'charedit': 'екран персонажа',
+    'stat': 'характеристики', 'skill_ui': 'екран навичок', 'inven_ui': 'інвентар', 'logbk_ui': 'журнал: вкладки',
+    'combat': 'бій: повідомлення', 'fate_ui': 'очки долі', 'follower_ui': 'меню супутників', 'sleepui': 'відпочинок',
+    'worldmap': 'мапа світу', 'options_ui': 'налаштування', 'multiplayer': 'мережева гра', 'critter': 'істоти: статуси',
+    'description': 'назви предметів, істот, об’єктів', 'gamedesc': 'описи предметів', 'item_effect': 'ефекти предметів',
+    'gameitemeffect': 'ефекти предметів модуля', 'gamekey': 'ключі', 'gamebless': 'благословення',
+    'gamecurse': 'прокляття', 'gameback': 'передісторії', 'spell': 'закляття', 'skill': 'навички',
+    'tech': 'технології', 'schematic_text': 'креслення', 'gamequestlog': 'журнал квестів',
+    'gamequestlogdumb': 'журнал квестів (тупий ГГ)', 'gamereplog': 'репутації', 'storystate': 'сюжетні етапи',
+    'gamearea': 'місця на мапі', 'gamenewspaper': 'газета', 'gamebook': 'книжки', 'gamenote': 'записки',
+    'gameplaque': 'таблички', 'gametelegram': 'телеграми', 'gamelevelname': 'назви рівнів',
+    'userlevelname': 'назви рівнів (користувацькі)', 'quotes': 'цитати на завантаженні',
+    'item': 'типи предметів, повідомлення інвентаря', 'level': 'підвищення рівня', 'language': 'мова файлів (службове)',
+    'reaction': 'ставлення NPC', 'trap': 'пастки', 'text_filter_sleep': 'відпочинок: фільтр', 'urls': 'посилання',
+    'skill_ui': 'екран навичок', 'optionscombatmode': 'налаштування: режим бою', 'optionsdifficulty': 'налаштування: складність',
+    'optionsfloats': 'налаштування: спливні написи', 'optionsoffon': 'налаштування: увімк./вимк.', 'optionswalk': 'налаштування: ходьба',
+    'game_rd_npc_m2m': 'чутки', 'game_rp_npc_m2m': 'чутки: відповіді гравця', 'gd_cls_m2m': 'загальні репліки за соц. класом', 'gd_npc_m2m': 'загальні репліки NPC',
+    'gd_rce_m2m': 'загальні репліки за расою', 'gd_sto_m2m': 'репліки крамарів', 'gd_pc2m': 'загальні відповіді гравця',
+}
+
+
+def _mes_title(name):
+    if name in MES_TITLE:
+        return MES_TITLE[name]
+    base = re.sub(r'_(m2m|m2f|f2f|f2m|pc2m|pc2f|m2m_dumb)$', '_m2m', name)
+    t = MES_TITLE.get(base) or MES_TITLE.get(base.replace('_dumb', '')) or ''
+    suf = {'m2m': 'Ч→Ч', 'm2f': 'Ч→Ж', 'f2f': 'Ж→Ж', 'f2m': 'Ж→Ч', 'pc2m': 'до ГГ-чол.', 'pc2f': 'до ГГ-жін.'}
+    m = re.search(r'_(m2m|m2f|f2f|f2m|pc2m|pc2f)(_dumb)?$', name)
+    if t and m:
+        t += ' · ' + suf[m.group(1)] + (' · тупий ГГ' if m.group(2) or '_dumb' in name else '')
+    return t
+
+
+def _mes_group(name):
+    for g, names in MES_GROUPS:
+        if name in names:
+            return g
+    if name.startswith(('gd_', 'game_rd_', 'game_rp_')):
+        return 'Загальні репліки й чутки'
+    return 'Інше'
+
+
+def _safe_mes(rel):
+    rel = sheet._rel((rel or '').strip())
+    if not re.fullmatch(r'mes/[\w.\-]+\.mes', rel):
+        raise ValueError(f'bad path {rel!r}')
+    return rel
+
+
+def api_mes_files():
+    rows, st = [], os.path.join(ROOT, 'status.tsv')
+    if os.path.exists(st):
+        for line in open(st, encoding='utf-8'):
+            c = line.rstrip('\n').split('\t')
+            if len(c) >= 7 and c[1] == 'mes' and c[2] == 'translate' and c[0].startswith('mes/'):
+                rows.append({'path': c[0], 'records': c[3], 'words': c[4], 'status': c[6]})
+    else:
+        d = os.path.join(ROOT, 'uk', 'mes')
+        for f in sorted(os.listdir(d)) if os.path.isdir(d) else []:
+            if f.endswith('.mes') and os.path.exists(os.path.join(ROOT, 'source', 'mes', f)):
+                rows.append({'path': 'mes/' + f, 'records': '', 'words': '', 'status': ''})
+    order = {g: i for i, (g, _) in enumerate(MES_GROUPS)}
+    for r in rows:
+        n = r['path'][4:-4]
+        r['name'], r['title'], r['group'] = n, _mes_title(n), _mes_group(n)
+        r['rules'] = widthcheck.rules_for(r['path'])
+    rows.sort(key=lambda r: (order.get(r['group'], 9), r['group'], r['name']))
+    return {'files': rows}
+
+
+def _mes_entries(rel):
+    src = {e['key'].decode('latin1').strip(): e['value'].decode('cp1252', 'replace')
+           for e in arcfmt.parse_mes(open(os.path.join(ROOT, 'source', rel), 'rb').read())}
+    out = []
+    for e in arcfmt.parse_mes(open(os.path.join(ROOT, 'uk', rel), 'rb').read()):
+        k = e['key'].decode('latin1').strip()
+        en, uk = src.get(k, ''), e['value'].decode('utf-8', 'replace')
+        pl = [{'label': a, 'font': b, 'width': c, 'lines': d} for a, b, c, d in widthcheck.places(rel, k, en)]
+        out.append({'key': k, 'en': en, 'uk': uk, 'hints': livecheck.mes_hints(rel, k, en, uk), 'places': pl})
+    return out
+
+
+def api_mes(q):
+    rel = _safe_mes(q.get('path'))
+    recs = _mes_entries(rel)
+    return {'path': rel, 'records': recs, 'rules': widthcheck.rules_for(rel), 'title': _mes_title(rel[4:-4])}
+
+
+def api_mes_check(body):
+    rel = _safe_mes(body.get('path'))
+    return livecheck.mes_hints(rel, str(body.get('key', '')), body.get('en', ''), body.get('uk', ''))
+
+
+def api_mes_save(body):
+    rel = _safe_mes(body.get('path'))
+    key = str(body['key']).strip()
+    if not re.fullmatch(r'\d+', key):
+        raise ValueError('bad key')
+    text = body['uk'].replace('\r\n', '\n')
+    expect = {rel: {key: {'': body['expect']}}} if body.get('expect') is not None else None
+    with LOCK:
+        plans, errs, notes, _ = sheet.plan_edits({rel: {key: {'': text}}}, expect)
+        if errs:
+            return {'ok': False, 'errors': errs}
+        write_plans(plans)
+        problems = qa.check(rel)
+    rec = next(r for r in _mes_entries(rel) if r['key'] == key)
+    return {'ok': True, 'notes': notes, 'qa': problems, 'record': rec}
+
+
 def api_check(body):
     return livecheck.hints(body.get('kind', 'pc'), body.get('en', ''), body.get('uk', ''),
                            body.get('enf', ''), body.get('ukf', ''), body.get('gate', ''))
@@ -565,6 +694,17 @@ class Handler(BaseHTTPRequestHandler):
                 return self._send(200, api_search(q))
             if u.path == '/api/glossary':
                 return self._send(200, api_glossary(q))
+            if u.path == '/api/mes/files':
+                return self._send(200, api_mes_files())
+            if u.path == '/api/mes':
+                return self._send(200, api_mes(q))
+            if u.path == '/api/preview':
+                f = q.get('font', 'flare12')
+                if f not in ('flare12', 'morph15', 'morph30', 'zurich16', 'arial10'):
+                    raise ValueError('font')
+                data, _ = textpreview.render(q.get('text', '')[:3000], f, max(40, min(800, int(q.get('width', 291)))),
+                                             max(0, min(20, int(q.get('lines', 0)))))
+                return self._send(200, data, 'image/png')
             if u.path == '/api/pic':
                 data = api_pic(q)
                 if not data:
@@ -588,6 +728,10 @@ class Handler(BaseHTTPRequestHandler):
             body = json.loads(self.rfile.read(int(self.headers.get('Content-Length', 0))) or b'{}')
             if self.path == '/api/check':
                 return self._send(200, api_check(body))
+            if self.path == '/api/mes/check':
+                return self._send(200, api_mes_check(body))
+            if self.path == '/api/mes/save':
+                return self._send(200, api_mes_save(body))
             if self.path == '/api/save':
                 return self._send(200, api_save(body))
             if self.path == '/api/glossary':
