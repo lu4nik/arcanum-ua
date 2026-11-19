@@ -219,3 +219,4 @@ body.mode-mes label.toggle:has(#only-problems), body.mode-mes label.toggle:has(#
 .pv figure { margin: 0; }
 .pv img { display: block; image-rendering: pixelated; max-width: 100%; border-radius: 3px; }
 .pv figcaption { font-size: 11px; color: var(--muted); margin-top: 2px; }
+body.mode-mes #cards { width: auto; flex: 1; }
