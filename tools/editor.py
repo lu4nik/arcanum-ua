@@ -18,6 +18,7 @@ from urllib.parse import urlparse, parse_qs
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, 'tools'))
 import aipack, arcfmt, dlggraph, glosscheck, livecheck, qa, sheet
+import npcart
 
 STATIC = os.path.join(ROOT, 'tools', 'editor')
 LOCK = threading.Lock()
@@ -314,12 +315,46 @@ def api_index_save(body):
     return {'ok': True, 'index': vals}
 
 
+_pics = npcart.Pictures(os.environ.get('ARCANUM_GAME', npcart.GAME))
+_pics_lock = threading.Lock()
+
+
+def speakers():
+    """dlg number -> NPCs that speak it, from the player's game copy ({} without one)."""
+    with _pics_lock:
+        try:
+            return _pics.index
+        except Exception as e:  # a damaged or unusual install must not break the editor
+            sys.stderr.write('npcart: %s\n' % e)
+            _pics._index = {}
+            return {}
+
+
+def own_portrait(npc):
+    """True when the NPC has its own portrait (companions: portrait/NPC*.bmp)."""
+    try:
+        names = _pics.gameport
+    except AttributeError:
+        names = _pics.gameport = _pics.game.mes('portrait/gameport.mes')
+    return (names.get(npc.get('portrait') or -1) or '').upper().startswith('NPC')
+
+
 def api_files():
-    rows, ix = [], load_index()
+    rows, ix, spk = [], load_index(), speakers()
     for r in status_rows():
         m = _meta.get(r['path']) or {'title': title_of(r['path']), 'kind': kind_of(r['path'])}
-        rows.append({**r, **m, 'ix': ix.get(r['path'])})
-    return {'ready': _meta_state['ready'], 'files': rows}
+        num = int(re.match(r'dlg/(\d+)', r['path']).group(1))
+        s = spk.get(num)
+        sp = {'name': s[0]['name'], 'proto': s[0]['proto'], 'maps': s[0]['maps'][:4],
+              'own': own_portrait(s[0])} if s else None
+        rows.append({**r, **m, 'ix': ix.get(r['path']), 'spk': sp})
+    return {'ready': _meta_state['ready'], 'files': rows, 'game': bool(spk)}
+
+
+def api_pic(q):
+    num = int(q.get('num', ''))
+    with _pics_lock:
+        return _pics.get(num)
 
 
 def status_rows():
@@ -514,7 +549,7 @@ class Handler(BaseHTTPRequestHandler):
         self.send_response(code)
         self.send_header('Content-Type', ctype)
         self.send_header('Content-Length', str(len(data)))
-        self.send_header('Cache-Control', 'no-store')
+        self.send_header('Cache-Control', 'max-age=3600' if ctype == 'image/png' else 'no-store')
         self.end_headers()
         self.wfile.write(data)
 
@@ -530,6 +565,11 @@ class Handler(BaseHTTPRequestHandler):
                 return self._send(200, api_search(q))
             if u.path == '/api/glossary':
                 return self._send(200, api_glossary(q))
+            if u.path == '/api/pic':
+                data = api_pic(q)
+                if not data:
+                    return self._send(404, {'error': 'no picture'})
+                return self._send(200, data, 'image/png')
             name = 'index.html' if u.path in ('/', '/index.html') else u.path.lstrip('/')
             if not re.fullmatch(r'[\w\-]+\.(html|js|css)', name):
                 return self._send(404, {'error': 'not found'})

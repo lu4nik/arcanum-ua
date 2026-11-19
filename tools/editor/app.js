@@ -92,9 +92,68 @@ function renderFiles() {
   if (sort === 'words') rows = [...rows].sort((a, b) => (+b.words || b.npc + b.pc || 0) - (+a.words || a.npc + a.pc || 0));
   const ul = $('#files'); ul.textContent = '';
   const frag = document.createDocumentFragment();
-  rows.forEach(x => frag.append(fileRow(x)));
+  if ($('#f-group').checked) renderGroups(rows, frag);
+  else rows.forEach(x => frag.append(fileRow(x)));
   ul.append(frag);
   if (state.files.length) $('#list-info').textContent = rows.length === state.files.length ? '' : `показано ${rows.length} з ${state.files.length}`;
+}
+/* ---------- grouping by speaker ---------- */
+
+const numOf = path => +((path.match(/dlg\/(\d+)/) || [])[1] || 0);
+const groupOpen = new Map();  // key -> true/false once the user toggled it
+// Person part of «хто»: before the first comma, without «?» — «Вірджил, супутник» → «Вірджил».
+function personOf(x) {
+  const who = ((x.ix || {}).who || '').replace(/\?/g, '').split(',')[0].trim();
+  if (who) return who;
+  return x.spk && x.spk.name ? x.spk.name : '';
+}
+// Groups by person name (case-insensitive). Not by game prototype: generic
+// protos (villager, guard) are shared by unrelated NPCs. Wrong group? Fix «хто» via ✎ опис.
+function groupFiles(rows) {
+  const groups = new Map();
+  for (const x of rows) {
+    const p = personOf(x);
+    const k = p ? p.toLowerCase() : '—';
+    if (!groups.has(k)) groups.set(k, { key: k, files: [], name: p || 'без персонажа' });
+    groups.get(k).files.push(x);
+  }
+  for (const G of groups.values()) G.pic = G.files.find(x => x.spk && x.spk.own) || G.files.find(x => x.spk);
+  return [...groups.values()].sort((a, b) => (a.key === '—') - (b.key === '—') || b.files.length - a.files.length || a.name.localeCompare(b.name, 'uk'));
+}
+function picImg(x, cls) {
+  const img = el('img', { class: cls, alt: '', loading: 'lazy', src: '/api/pic?num=' + numOf(x.path) });
+  img.addEventListener('error', () => img.classList.add('none'));
+  return img;
+}
+function renderGroups(rows, frag) {
+  const curGroup = state.cur && state.cur.path;
+  for (const G of groupFiles(rows)) {
+    const open = groupOpen.has(G.key) ? groupOpen.get(G.key) : G.files.some(x => x.path === curGroup) || rows.length < 40;
+    const head = el('li', { class: 'grp' + (open ? ' open' : ''), title: G.pic && G.pic.spk ? [G.pic.spk.name, ...(G.pic.spk.maps || [])].join(' · ') : '' });
+    head.append(G.pic ? picImg(G.pic, 'av') : el('span', { class: 'av none' }));
+    const bad = G.files.reduce((n, x) => n + (x.err || 0), 0), warn = G.files.reduce((n, x) => n + (x.warn || 0), 0);
+    const st = {}; G.files.forEach(x => { if (x.status) st[x.status] = (st[x.status] || 0) + 1; });
+    head.append(el('div', { class: 'gt' },
+      el('div', { class: 'gn', text: G.name }),
+      el('div', { class: 'gs', text: `${G.files.length} діал.` + (Object.keys(st).length ? ' · ' + Object.entries(st).map(([k, v]) => `${k} ${v}`).join(', ') : '') }),
+    ));
+    if (bad) head.append(el('span', { class: 'badge err', text: `✕ ${bad}` }));
+    else if (warn) head.append(el('span', { class: 'badge warn', text: `! ${warn}` }));
+    head.addEventListener('click', () => { groupOpen.set(G.key, !open); renderFiles(); });
+    frag.append(head);
+    if (open) G.files.forEach(x => frag.append(fileRow(x)));
+  }
+}
+function showFilePic(path) {
+  const img = $('#file-pic'), x = state.files.find(f => f.path === path);
+  let src = x && x.spk ? x : null;
+  if (x && !(src && src.spk.own)) {
+    const p = personOf(x).toLowerCase();
+    const same = p ? state.files.filter(f => f.spk && personOf(f).toLowerCase() === p) : [];
+    src = same.find(f => f.spk.own) || src || same[0] || null;
+  }
+  img.hidden = !src;
+  if (src) { img.onerror = () => (img.hidden = true); img.src = '/api/pic?num=' + numOf(src.path); img.title = src.spk.name; }
 }
 async function search(q) {
   const box = $('#results');
@@ -122,6 +181,7 @@ async function openFile(path, line) {
   const d = await api('/api/dialog?path=' + encodeURIComponent(path));
   state.cur = d; state.recs = new Map(d.records.map(r => [r.num, r])); state.dirty.clear(); state.sel = null;
   $('#file-title').textContent = d.path;
+  showFilePic(d.path);
   document.title = d.path.replace(/^dlg\//, '') + ' — діалоги';
   renderFiles(); renderCards(); renderGraph();
   const first = line != null ? line : (d.graph.roots[0] ?? null);
@@ -470,6 +530,8 @@ function zoom(step) {
 
 $('#file-filter').addEventListener('input', renderFiles);
 ['#f-status', '#f-sort', '#f-bad'].forEach(id => $(id).addEventListener('change', renderFiles));
+$('#f-group').addEventListener('change', e => { try { localStorage.setItem('groupBySpeaker', e.target.checked ? '1' : ''); } catch (_) {} renderFiles(); });
+try { $('#f-group').checked = localStorage.getItem('groupBySpeaker') === '1'; } catch (_) {}
 $('#search-form').addEventListener('submit', e => { e.preventDefault(); search($('#search').value.trim()).catch(err => toast(err.message, true)); });
 $('#search').addEventListener('keydown', e => { if (e.key === 'Escape') { $('#search').value = ''; search(''); } });
 $('#only-problems').addEventListener('change', applyFilter);

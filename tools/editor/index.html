@@ -12,7 +12,7 @@
   <form id="search-form">
     <input id="search" type="search" placeholder="Пошук: текст EN/UK, 01687, 01687#14, #14 у поточному" autocomplete="off">
   </form>
-  <span id="file-title"></span>
+  <img id="file-pic" alt="" hidden><span id="file-title"></span>
   <label class="toggle"><input type="checkbox" id="only-problems"> лише проблемні</label>
   <label class="toggle"><input type="checkbox" id="show-graph" checked> граф</label>
   <button id="gl-open" title="Пошук і редагування glossary/glossary.tsv">Глосарій</button>
@@ -32,6 +32,7 @@
         <option value="words">за обсягом</option>
       </select>
       <label title="Лише файли з помилками або попередженнями"><input type="checkbox" id="f-bad"> з проблемами</label>
+      <label title="Згрупувати за полем «хто» з docs/dlg-index.tsv; аватарка — з копії гри"><input type="checkbox" id="f-group"> за персонажем</label>
     </div>
     <div id="list-info" class="muted"></div>
     <div id="results" hidden></div>

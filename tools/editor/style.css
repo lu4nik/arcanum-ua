@@ -175,3 +175,14 @@ textarea.dirty { border-color: var(--accent); }
 .gl-row.hl { background: color-mix(in srgb, var(--sel) 12%, transparent); }
 .gl-form { display: grid; grid-template-columns: 1fr 1fr 2fr auto auto; gap: 6px; padding: 8px 10px; border-bottom: 1px solid var(--line); background: var(--bg); }
 .gl-form input { font: inherit; color: var(--ink); background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 4px 8px; }
+
+/* grouping by speaker */
+#files li.grp { display: flex; align-items: center; gap: 8px; padding: 5px 8px; position: sticky; top: 0; z-index: 1; background: var(--panel, var(--bg)); border-bottom: 1px solid var(--line); border-left: 3px solid transparent; }
+#files li.grp.open { border-left-color: var(--accent); }
+#files li.grp .gt { flex: 1; min-width: 0; }
+#files li.grp .gn { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#files li.grp .gs { font-size: 11px; color: var(--muted); }
+#files li.grp.open ~ li.f { padding-left: 18px; }
+img.av, span.av { width: 36px; height: 36px; flex: none; object-fit: contain; image-rendering: pixelated; background: #2a2622; border-radius: 4px; }
+img.av.none, span.av.none { background: var(--line); }
+#file-pic { height: 40px; width: auto; max-width: 48px; object-fit: contain; image-rendering: pixelated; background: #2a2622; border-radius: 4px; margin-right: 6px; vertical-align: middle; }
