@@ -9,14 +9,23 @@ archive is unpacked straight into the game folder:
   data/art/interface/*font.art         } Cyrillic fonts
   modules/Arcanum/art/interface/       }
   art/morph15font.art                  system font (game root)
+  data/rules/, modules/Arcanum/rules/  npc/monster/unique.txt with localized
+                                       stat/spell names (UAP variant)
+  no-UAP/...                           the same for a game without UAP
 
-Only our own files go in: translated text (converted UTF-8 -> cp1251) and the
-generated fonts. Nothing is copied out of the game's .dat archives.
+The rules files are the one exception to "only our own files": the original
+exe rebuilds NPC prototypes from them and matches stat/spell names against
+our translated stat.mes/spell.mes, so they have to carry the same names
+(tools/rules_l10n.py; owner's decision 2026-11-22). They are generated from
+the game copy at GAME (default /Applications/Arcanum).
+
+Only our own files go in: translated text (converted UTF-8 -> cp1251), the
+generated fonts and the localized rules files (see below).
 
 Usage:
   python3 tools/package.py [version]    # -> dist/arcanum-ua-<version>.zip
 """
-import datetime, io, os, sys, zipfile
+import datetime, io, os, subprocess, sys, tempfile, zipfile
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 UK = os.path.join(ROOT, 'uk')
@@ -31,6 +40,8 @@ INTERFACE_FONTS = [
     'roller', 'swiss921', 'zurich16', 'zurich20',
 ]
 TEXT_DESTS = ['data', 'modules/Arcanum']
+GAME = os.environ.get('ARCANUM_GAME', '/Applications/Arcanum')
+NO_UAP_DIR = 'no-UAP'  # ASCII: Windows unzip tools mangle non-ASCII folder names
 
 
 def translations():
@@ -60,9 +71,18 @@ def build(version):
             n_font += 1
         z.write(os.path.join(FONTS, 'morph15font_system.art'), f'{top}/art/morph15font.art')
         n_font += 1
+        n_rules = 0
+        with tempfile.TemporaryDirectory() as tmp:
+            subprocess.run([sys.executable, os.path.join(ROOT, 'tools', 'rules_l10n.py'), tmp, GAME], check=True)
+            for variant, prefix in (('uap', top), ('vanilla', f'{top}/{NO_UAP_DIR}')):
+                rules = os.path.join(tmp, variant, 'rules')
+                for name in sorted(os.listdir(rules)):
+                    for dest in TEXT_DESTS:
+                        z.write(os.path.join(rules, name), f'{prefix}/{dest}/rules/{name}')
+                    n_rules += 1
         for doc in sorted(os.listdir(DOCS)):
             z.write(os.path.join(DOCS, doc), f'{top}/{doc}')
-    print(f'{out}: {n_text} text files x{len(TEXT_DESTS)}, {n_font} fonts, '
+    print(f'{out}: {n_text} text files x{len(TEXT_DESTS)}, {n_font} fonts, {n_rules} rules files, '
           f'{os.path.getsize(out) // 1024} KiB')
     return out
 

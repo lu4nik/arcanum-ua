@@ -240,7 +240,8 @@ def build(f):
         o['Ё'] = B(0xCB if up else 0xEB).tight()
         T, three = L('T').tight(), L('3').tight()
         o['Т'] = T if up else scale_to(T, ink_top(T), top - r(3))
-        o['З'] = three if up else scale_to(three, ink_top(three), top)
+        # the digit 3 is only x-height tall in this font, so the capital is scaled up too
+        o['З'] = scale_to(three, ink_top(three), top)
 
         # Н-based: two stems without the bar
         Hg = o['Н']
@@ -340,6 +341,10 @@ def build(f):
         dd = draw(dd, rect(p2 - 1, BASE, p2 - 2 + fw, BASE + u(4)))
         dd = draw(dd, rect(aw + p2 - fw + 1, BASE, aw + p2, BASE + u(4)))
         o['Д'] = dd.tight()
+        # small д: the font's own uncial d (the ∂ shape, as in italic Cyrillic),
+        # which breaks up the run of straight stems in lowercase words
+        if not up:
+            o['Д'] = L('d').tight()
 
         # Г: F without its middle arm; Ґ: Г + upturn
         F = src('F', 'f').tight()

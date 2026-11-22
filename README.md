@@ -54,8 +54,13 @@ python3 tools/extract.py "C:/GOG Games/Arcanum"   # -> source/
 python3 tools/qa.py                                # перевірка структури перекладу проти source/
 python3 tools/widthcheck.py                        # чи влазять назви й описи
 python3 tools/newscheck.py                         # розкладка газет
-python3 tools/package.py 1.0                       # -> dist/arcanum-ua-1.0.zip
+ARCANUM_GAME="C:/GOG Games/Arcanum" python3 tools/package.py 1.0   # -> dist/arcanum-ua-1.0.zip
 ```
+
+Архів містить і `rules/npc.txt`, `monster.txt`, `unique.txt` з перекладеними назвами характеристик
+і заклять: гра будує з них прототипи NPC і звіряє ці назви з перекладеними `stat.mes`/`spell.mes`,
+тож з англійськими rules усі NPC після перебудови кешу `data\proto` ставали б чоловіками без своїх
+характеристик і заклять. `tools/rules_l10n.py` генерує їх із вашої копії гри (варіанти з UAP і без).
 
 Кирилицю Morpheus (меню, назви предметів і заклять) збирає `tools/morphcyr.py` із латинських літер
 вашої копії гри: спільні форми копіюються (А=A, В=B), інші віддзеркалюються, вирізаються чи
