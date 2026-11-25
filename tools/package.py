@@ -12,6 +12,9 @@ archive is unpacked straight into the game folder:
   data/rules/, modules/Arcanum/rules/  npc/monster/unique.txt with localized
                                        stat/spell names (UAP variant)
   no-UAP/...                           the same for a game without UAP
+  HighRes/gamepad.bmp                  Ukrainian gamepad button chart for the
+                                       lu4nik/arcanum-ce fork (rendered by its
+                                       scripts/gamepad_chart.py from CE)
 
 The rules files are the one exception to "only our own files": the original
 exe rebuilds NPC prototypes from them and matches stat/spell names against
@@ -41,6 +44,7 @@ INTERFACE_FONTS = [
 ]
 TEXT_DESTS = ['data', 'modules/Arcanum']
 GAME = os.environ.get('ARCANUM_GAME', '/Applications/Arcanum')
+CE = os.environ.get('ARCANUM_CE', os.path.expanduser('~/Games/arcanum-ce'))
 NO_UAP_DIR = 'no-UAP'  # ASCII: Windows unzip tools mangle non-ASCII folder names
 
 
@@ -80,6 +84,10 @@ def build(version):
                     for dest in TEXT_DESTS:
                         z.write(os.path.join(rules, name), f'{prefix}/{dest}/rules/{name}')
                     n_rules += 1
+        with tempfile.TemporaryDirectory() as tmp:
+            chart = os.path.join(tmp, 'gamepad.bmp')
+            subprocess.run([sys.executable, os.path.join(CE, 'scripts', 'gamepad_chart.py'), 'uk', chart], check=True)
+            z.write(chart, f'{top}/HighRes/gamepad.bmp')
         for doc in sorted(os.listdir(DOCS)):
             z.write(os.path.join(DOCS, doc), f'{top}/{doc}')
     print(f'{out}: {n_text} text files x{len(TEXT_DESTS)}, {n_font} fonts, {n_rules} rules files, '
